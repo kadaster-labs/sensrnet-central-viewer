@@ -32,18 +32,13 @@ $font-size-base: 1.25rem;
   left: auto;
 }
 
+.ol-control {
+  position: relative !important;
+  opacity: 0 !important;
+}
+
 .ggc-dt-theme {
   padding-left: 0px !important;
-}
-
-.required-text {
-  color: red;
-  font-style: italic;
-  font-weight: lighter;
-}
-
-.required {
-  color: red;
 }
 
 button[type="submit"] {

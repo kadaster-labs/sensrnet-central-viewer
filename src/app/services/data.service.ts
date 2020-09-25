@@ -27,10 +27,6 @@ export class DataService {
     });
   }
 
-  public sendMessage(namespace: string = '/', ...args: any[]) {
-    this.socket.emit(namespace, ...args);
-  }
-
   public subscribeTo<T>(namespace: string = '/'): Observable<T> {
     return new Observable((observer: Subscriber<T>) => {
       this.socket.on(namespace, (message: T) => {

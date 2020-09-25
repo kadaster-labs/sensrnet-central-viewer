@@ -21,13 +21,10 @@ import { Dataset, DatasetTreeEvent, Theme } from 'generieke-geo-componenten-data
 import { MapComponentEvent, MapComponentEventTypes, MapService } from 'generieke-geo-componenten-map';
 import { SearchComponentEvent } from 'generieke-geo-componenten-search';
 
-import { AuthenticationService } from '../services/authentication.service';
-
 import { ISensor } from '../model/bodies/sensor-body';
 import { EventType } from '../model/events/event-type';
 import { DataService } from '../services/data.service';
 import { SensorInfo } from './../model/bodies/sensorInfo';
-import { LocationService } from '../services/location.service';
 import Geometry from 'ol/geom/Geometry';
 import { environment } from '../../environments/environment';
 import Control from 'ol/control/Control';
@@ -66,9 +63,6 @@ export class ViewerComponent implements OnInit {
   private selectCluster: SelectCluster;
 
   public selectedSensor: ISensor;
-  public paneSensorRegisterActive = false;
-  public paneSensorUpdateActive = false;
-  public paneOwnerUpdateActive = false;
 
   private epsgRD = '+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 +y_0=463000 +ellps=bessel +units=m +no_defs';
   private epsgWGS84 = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs';
@@ -91,11 +85,9 @@ export class ViewerComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
     private httpClient: HttpClient,
     public mapService: MapService,
     private dataService: DataService,
-    private locationService: LocationService,
   ) { }
 
   public ngOnInit(): void {
@@ -339,26 +331,7 @@ export class ViewerComponent implements OnInit {
       this.updateSensor(newSensor);
     });
 
-    this.locationService.showLocation$.subscribe((sensor) => {
-      this.removeLocationFeatures();
-
-      if (!sensor) {
-        this.clearLocationLayer();
-        this.toggleSensorRegisterPane(false);
-        return;
-      }
-
-      if (!this.paneSensorRegisterActive && !this.paneSensorUpdateActive) {
-        return;
-      }
-
-      const locationFeature = new Feature({
-        geometry: new Point(proj4(this.epsgWGS84, this.epsgRD, [sensor.coordinates[1], sensor.coordinates[0]])),
-      });
-      this.setLocation(locationFeature);
-    });
-
-    if (environment.clientName === 'Local' || environment.apiUrl.startsWith('https')) {
+    if (environment.apiUrl.startsWith('https')) {
       this.addFindMeButton();
     }
   }
@@ -419,17 +392,9 @@ export class ViewerComponent implements OnInit {
       const mapCoordinateRD = mapEvent.value.coordinate;
       const mapCoordinateWGS84 = proj4(this.epsgRD, this.epsgWGS84, mapCoordinateRD);
 
-      if (!this.paneSensorUpdateActive) {
-        this.removeHighlight();
-        this.activeFeatureInfo = null;
-        this.showInfo = false;
-      }
-
-      this.locationService.setLocation({
-        type: 'Point',
-        coordinates: [mapCoordinateWGS84[1], mapCoordinateWGS84[0], 0],
-        baseObjectId: 'iets'
-      });
+      this.removeHighlight();
+      this.activeFeatureInfo = null;
+      this.showInfo = false;
 
       map.forEachFeatureAtPixel(mapEvent.value.pixel, (data, layer) => {
         const features = data.getProperties().features;
@@ -600,59 +565,6 @@ export class ViewerComponent implements OnInit {
     this.selectedSensor = undefined;
   }
 
-  public toggleSensorRegisterPane(active?: boolean): void {
-    if (active === undefined) {
-      active = !this.paneSensorRegisterActive;
-    }
-
-    if (!active) {
-      this.clearLocationLayer();
-    }
-
-    this.paneSensorRegisterActive = active;
-  }
-
-  public toggleSensorUpdatePane(active?: boolean): void {
-    if (active === undefined) {
-      active = !this.paneSensorUpdateActive;
-    }
-
-    this.paneSensorUpdateActive = active;
-  }
-
-  public toggleOwnerUpdatePane(active?: boolean): void {
-    if (active === undefined) {
-      active = !this.paneOwnerUpdateActive;
-    }
-
-    this.paneOwnerUpdateActive = active;
-  }
-
-  public togglePane(pane: string) {
-    switch (pane) {
-      case 'SensorRegister':
-        this.toggleSensorRegisterPane();
-        this.toggleSensorUpdatePane(false);
-        this.toggleOwnerUpdatePane(false);
-        break;
-      case 'SensorUpdate':
-        this.toggleSensorRegisterPane(false);
-        this.toggleSensorUpdatePane();
-        this.toggleOwnerUpdatePane(false);
-        break;
-      case 'OwnerUpdate':
-        this.toggleSensorRegisterPane(false);
-        this.toggleSensorUpdatePane(false);
-        this.toggleOwnerUpdatePane();
-        break;
-      default:
-        this.toggleSensorRegisterPane(false);
-        this.toggleSensorUpdatePane(false);
-        this.toggleOwnerUpdatePane(false);
-        break;
-    }
-  }
-
   private zoomToPoint(point: Point) {
     const view = this.mapService.getMap('srn').getView();
     view.fit(point, {
@@ -688,10 +600,5 @@ export class ViewerComponent implements OnInit {
     this.mapService.getMap('srn').addControl(new Control({
       element: locate,
     }));
-  }
-
-  public async logout() {
-    await this.authenticationService.logout();
-    this.router.navigate(['/login']);
   }
 }

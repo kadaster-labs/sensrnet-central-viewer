@@ -6,13 +6,12 @@ networks:
     driver: bridge
 
 services:
-  registry-frontend:
+  central-viewer:
     build:
         context: "."
     ports:
       - 4200:4200
     environment:
-      - PROJECT=dev
       - CONFIGURATION=production
       - PROXY_CONFIG=src/proxy.conf.json
     networks:
