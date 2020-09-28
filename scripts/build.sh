@@ -5,6 +5,6 @@ set -ex
 USERNAME=sensrnet
 REGISTRY=sensrnetregistry.azurecr.io
 # image name
-IMAGE=registry-frontend
+IMAGE=central-viewer
 
 docker build -t $REGISTRY/$USERNAME/$IMAGE:latest .

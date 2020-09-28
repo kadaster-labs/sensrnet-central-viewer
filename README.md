@@ -55,10 +55,9 @@ Building for deployment is then adding an additional flag `--configuration=produ
 The different configuration are defined in `angular.json` as different projects. The corresponding stylesheets are to be placed in `src/environments/`.
 
 ## Local app deployment with Docker:
-Note: Docker CE is required for building the images.
+While the registry front-end currently works with Docker compose, it is limited in this repo. This is due to the Docker image building the front-end app and serving it using nginx as webserver. The nginx is not configured as a reverse proxy, as the image will most likely run behind another load balancer / reverse proxy, Traefik in our case. 
 
-Commands:
-- `docker-compose up --build`
+This means that deploying this image with Docker-compose will not have websockets, while deploying it in a Kubernetes cluster using our deployment scripts will make it work. We might change the setup for local development in the future. For now, it is recommended to develop using `npm run start`.
 
 ## Building Docker images
 Deployment is done in an Azure Kubernetes Service (AKS) cluster. For releases, run `./scripts/release.sh`. It updates the package version and builds the Docker images. Additionally, it pushes the newly created images to the Azure Container Registry (ACR).
