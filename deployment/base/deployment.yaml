@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: central-viewer
+  name: central-viewer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: central-viewer
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: central-viewer
+    spec:
+      containers:
+      - image: sensrnetregistry.azurecr.io/sensrnet/central-viewer:latest
+        name: central-viewer
+        ports:
+        - containerPort: 8080
+        resources: {}
+      restartPolicy: Always
+status: {}

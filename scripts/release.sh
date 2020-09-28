@@ -5,7 +5,7 @@ set -ex
 USERNAME=sensrnet
 REGISTRY=sensrnetregistry.azurecr.io
 # image name
-IMAGE=registry-frontend
+IMAGE=central-viewer
 
 # ensure we're logged on at the registry
 az acr login --name sensrnetregistry
