@@ -31,6 +31,7 @@ import Control from 'ol/control/Control';
 import { Extent } from 'ol/extent';
 import { FitOptions } from 'ol/View';
 import { Category } from '../model/bodies/sensorTypes';
+import {SensorService} from "../services/sensor.service";
 
 @Component({
   templateUrl: './viewer.component.html',
@@ -88,7 +89,74 @@ export class ViewerComponent implements OnInit {
     private httpClient: HttpClient,
     public mapService: MapService,
     private dataService: DataService,
-  ) { }
+    private sensorService: SensorService,
+  ) {}
+
+  public getStyleCache() {
+    const styleCache = {};
+    for (const item1 of Object.keys(Category).filter(String)) {
+      for (const item2 of [true, false]) {
+        switch (item2) {
+          case true:
+            const styleNameActive = item1 + '_active';
+            const styleActive = [new Style({
+              image: new CircleStyle({
+                radius: 15,
+                fill: new Fill({
+                  color: this.getNodeColor(item1, 0.9),
+                }),
+                stroke: new Stroke({
+                  color: '#fff',
+                  width: 1.5
+                })
+              })
+            }), new Style({
+              image: new Icon({
+                scale: 0.25,
+                src: `/assets/icons/${item1}_op.png`
+              })
+            })
+            ];
+
+            for (const style of Object.values(styleActive)) {
+              style.getImage().load();
+            }
+            styleCache[styleNameActive] = styleActive;
+            break;
+
+          case false:
+            const styleNameInactive = item1 + '_inactive';
+            const styleInActive = [new Style({
+              image: new CircleStyle({
+                radius: 15,
+                fill: new Fill({
+                  color: this.getNodeColor(item1, 0.25),
+                }),
+                stroke: new Stroke({
+                  color: '#fff',
+                  width: 1.5
+                })
+              })
+            }), new Style({
+              image: new Icon({
+                scale: 0.25,
+                src: `/assets/icons/${item1}_op.png`
+              })
+            })
+            ];
+
+            for (const style of Object.values(styleInActive)) {
+              style.getImage().load();
+            }
+            styleCache[styleNameInactive] = styleInActive;
+
+            break;
+        }
+      }
+    }
+
+    return styleCache;
+  }
 
   public ngOnInit(): void {
     this.httpClient.get('/assets/layers.json').subscribe(
@@ -100,97 +168,31 @@ export class ViewerComponent implements OnInit {
     );
 
     this.dataService.connect();
-    this.dataService.subscribeTo('Sensors').subscribe((sensors: Array<ISensor>) => {
+    this.sensorService.getAll().subscribe((sensors: Array<ISensor>) => {
       const featuresData: Array<object> = sensors.map((sensor) => this.sensorToFeature(sensor));
       const features: Array<Feature> = (new GeoJSON()).readFeatures({
         features: featuresData,
         type: 'FeatureCollection',
       });
 
-      const styleCache = {};
-      const nodeIds = [...new Set(features.map(item => item.get('nodeId')))];
-      const sensorTypes = Object.keys(Category).filter(String);
-      const activeTypes = [true, false];
-
-      for (const item of nodeIds) {
-        for (const item1 of sensorTypes) {
-          for (const item2 of activeTypes) {
-            switch (item2) {
-              case true:
-                const styleNameActive = item + '_' + item1 + '_active';
-                const styleactive = [new Style({
-                  image: new CircleStyle({
-                    radius: 15,
-                    fill: new Fill({
-                      color: this.getNodeColor(item, 0.9),
-                    }),
-                    stroke: new Stroke({
-                      color: '#fff',
-                      width: 1.5
-                    })
-                  })
-                }), new Style({
-                  image: new Icon({
-                    scale: 0.25,
-                    src: `/assets/icons/${item1}_op.png`
-                  })
-                })
-                ];
-                styleCache[styleNameActive] = styleactive;
-                break;
-
-              case false:
-                const styleNameInactive = item + '_' + item1 + '_inactive';
-                const styleinactive = [new Style({
-                  image: new CircleStyle({
-                    radius: 15,
-                    fill: new Fill({
-                      color: this.getNodeColor(item, 0.25),
-                    }),
-                    stroke: new Stroke({
-                      color: '#fff',
-                      width: 1.5
-                    })
-                  })
-                }), new Style({
-                  image: new Icon({
-                    scale: 0.25,
-                    src: `/assets/icons/${item1}_op.png`
-                  })
-                })
-                ];
-                styleCache[styleNameInactive] = styleinactive;
-                break;
-            }
-          }
-        }
-      }
-
-      for (const style of Object.values(styleCache)) {
-        for (const item of Object.values(style)) {
-          item.getImage().load();
-        }
-      }
-
+      const styleCache = this.getStyleCache();
       const styleCluster = (feature) => {
-        const FEATURES_ = feature.get('features');
-        let numberOfFeatures = FEATURES_.length;
         let style: Style[];
 
+        const FEATURES_ = feature.get('features');
+        let numberOfFeatures = FEATURES_.length;
         if (numberOfFeatures === 1) {
           const active = feature.get('features')[0].values_.active;
-          const sensorType = feature.get('features')[0].values_.typeName[0];
-          const nodeId = feature.get('features')[0].values_.nodeId;
+          const category = feature.get('features')[0].values_.category;
 
           if (!active) {
-            numberOfFeatures = nodeId + '_' + sensorType + '_inactive';
+            numberOfFeatures = `${category}_inactive`;
             style = styleCache[numberOfFeatures];
           } else {
-            numberOfFeatures = nodeId + '_' + sensorType + '_active';
+            numberOfFeatures = `${category}_active`;
             style = styleCache[numberOfFeatures];
           }
-        }
-        else {
+        } else {
           style = styleCache[numberOfFeatures];
         }
 
@@ -213,6 +215,7 @@ export class ViewerComponent implements OnInit {
           })];
           styleCache[numberOfFeatures] = style;
         }
+
         return style;
       };
 
@@ -222,17 +225,16 @@ export class ViewerComponent implements OnInit {
 
         if (feature.values_.hasOwnProperty('selectclusterfeature') && zoomLevel > this.clusterMaxZoom) {
           const active = feature.get('features')[0].values_.active;
-          const sensorType = feature.get('features')[0].values_.typeName[0];
-          const nodeid = feature.get('features')[0].values_.nodeId;
+          const category = feature.get('features')[0].values_.category;
 
           let style: Style[];
 
           if (!active) {
-            styleFeatures = nodeid + '_' + sensorType + '_inactive';
+            styleFeatures = category + '_inactive';
             style = styleCache[styleFeatures];
           }
           if (active) {
-            styleFeatures = nodeid + '_' + sensorType + '_active';
+            styleFeatures = category + '_active';
             style = styleCache[styleFeatures];
           }
           return style;
@@ -276,6 +278,7 @@ export class ViewerComponent implements OnInit {
           const activeFeature = new SensorInfo(
             feature.get('name'),
             feature.get('typeName'),
+            feature.get('category'),
             feature.get('active'),
             feature.get('aim'),
             feature.get('description'),
@@ -336,14 +339,12 @@ export class ViewerComponent implements OnInit {
     }
   }
 
-  public getNodeColor(nodeid: string, opacity: number) {
-    if (nodeid === 'node-gemeente-a') {
-      return `rgb( ${this.COLOR_NODE_GEMEENTE_A}, ${opacity})`;
-    }
-    if (nodeid === 'node-gemeente-b') {
-      return `rgb( ${this.COLOR_NODE_GEMEENTE_B}, ${opacity})`;
-    }
-    else {
+  public getNodeColor(category: string, opacity: number) {
+    if (category === 'Sensor') {
+      return `rgb( 0, 120, 54, ${opacity})`;
+    } else if (category === 'Camera') {
+      return `rgb( 227, 37, 39, ${opacity})`;
+    } else {
       return `rgb(19, 65, 115, ${opacity})`;
     }
   }
@@ -358,14 +359,13 @@ export class ViewerComponent implements OnInit {
       updatedSensor.location.coordinates[0], updatedSensor.location.coordinates[1]
     ]));
     sensor.setGeometry(geom);
-    this.removeHighlight();
     this.clearLocationLayer();
-    this.highlightFeature(sensor);
 
     // update feature info
     this.activeFeatureInfo = new SensorInfo(
       updatedSensor.name,
       updatedSensor.typeName,
+      updatedSensor.category,
       updatedSensor.active,
       updatedSensor.aim,
       updatedSensor.description,
@@ -452,14 +452,14 @@ export class ViewerComponent implements OnInit {
     return {
       sensor,
       name: sensor.name,
+      category: sensor.category,
       typeName: sensor.typeName,
       active: sensor.active,
       aim: sensor.aim,
       description: sensor.description,
       manufacturer: sensor.manufacturer,
       theme: sensor.theme,
-      nodeId: sensor.nodeId
-      // nodeId: this.mockNodeId()
+      nodeId: sensor.nodeId,
     };
   }
 
@@ -491,6 +491,7 @@ export class ViewerComponent implements OnInit {
     const info = new SensorInfo(
       feature.get('name'),
       feature.get('typeName'),
+      feature.get('category'),
       feature.get('active'),
       feature.get('aim'),
       feature.get('description'),

@@ -70,7 +70,7 @@ export class SensorService {
 
   /** Retrieve sensors */
   public getAll() {
-    return this.http.get(`${environment.apiUrl}/Sensor`).toPromise();
+    return this.http.get(`${environment.apiUrl}/Sensor`);
   }
 
   /** Retrieve a single sensor */
