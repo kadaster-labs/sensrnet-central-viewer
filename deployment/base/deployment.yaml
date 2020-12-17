@@ -16,7 +16,7 @@ spec:
         app: central-viewer
     spec:
       containers:
-      - image: sensrnetregistry.azurecr.io/sensrnet/central-viewer:latest
+      - image: sensrnetnl/central-viewer:latest
         name: central-viewer
         ports:
         - containerPort: 8080
