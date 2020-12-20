@@ -16,7 +16,7 @@ spec:
         app: central-viewer
     spec:
       containers:
-      - image: sensrnetnl/central-viewer:latest
+      - image: sensrnetnl/central-viewer:0.1.0
         name: central-viewer
         ports:
         - containerPort: 8080
