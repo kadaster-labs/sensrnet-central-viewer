@@ -2,7 +2,25 @@
   {
     "themeName": "Lagen",
     "datasets": [
-     
+      {
+        "datasetName": "sensrnet",
+        "services": [
+          {
+            "type": "wms",
+            "url": "http://localhost:8080/geoserver/sensrnet/ows",
+            "layers": [
+              {
+                "name": "Sensors",
+                "technicalName": "sensors",
+                "minResolution": 0.000102539,
+                "active": true,
+                "legendUrl": null,
+                "zIndex": 7
+              }
+            ]
+          }
+        ]
+      },
       {
         "datasetName": "Luchtfoto",
         "services": [

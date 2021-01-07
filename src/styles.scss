@@ -32,17 +32,18 @@ $font-size-base: 1.25rem;
   left: auto;
 }
 
-.ol-control {
-  position: relative !important;
-  opacity: 0 !important;
-}
-
 .ggc-dt-theme {
   padding-left: 0px !important;
 }
 
-button[type="submit"] {
-  margin-right: 20px;
+.required-text {
+  color: red;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+.required {
+  color: red;
 }
 
 .ggc-map-details-container {
@@ -55,4 +56,43 @@ button[type="submit"] {
   padding-top: 3px;
   padding-bottom: 3px;
   font-weight: 400;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.modal-window {
+  opacity: 1 !important;
+}
+
+label {
+  margin-top: 5px;
+  color: #000000;
+  font-style: normal;
+  font-weight: normal
+}
+
+.form-check-input {
+  margin-left: -1.25rem;
+  margin-right: 0.5em;
+}
+
+.form-check-label {
+  margin-left: 5px;
+}
+
+.form-group {
+  .row {
+    margin-left: 0;
+    margin-right: 0;
+
+    label {
+      margin-right: 1em;
+    }
+  }
+}
+
+.form-header {
+  margin-top: 72px;
 }
