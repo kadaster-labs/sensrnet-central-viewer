@@ -7,7 +7,7 @@
         "services": [
           {
             "type": "wms",
-            "url": "http://localhost:8080/geoserver/sensrnet/ows",
+            "url": "sensrnet-geoserver",
             "layers": [
               {
                 "name": "Sensors",
