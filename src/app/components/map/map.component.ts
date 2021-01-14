@@ -1,25 +1,28 @@
 import proj4 from 'proj4';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 
-import Overlay from 'ol/Overlay';
+import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
+import Stroke from 'ol/style/Stroke';
 import Control from 'ol/control/Control';
-import OverlayPositioning from 'ol/OverlayPositioning';
+import VectorLayer from 'ol/layer/Vector';
+import VectorSource from 'ol/source/Vector';
+import { Circle as CircleStyle, Style } from 'ol/style';
 
 import { SearchComponentEvent } from 'generieke-geo-componenten-search';
 import { Dataset, DatasetTreeEvent, Theme } from 'generieke-geo-componenten-dataset-tree';
 import { MapComponentEvent, MapService, MapComponentEventTypes } from 'generieke-geo-componenten-map';
 
-import { ISensor } from '../../model/bodies/sensor-body';
+import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.scss'],
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   @Input() searchBarHeight;
   @Input() clearLocationHighLight = true;
 
@@ -27,14 +30,14 @@ export class MapComponent implements OnInit {
     private router: Router,
     private mapService: MapService,
     private httpClient: HttpClient,
+    private modalService: ModalService,
   ) {}
 
   public mapName = 'srn';
   public subscriptions = [];
 
-  public popupOverlay: Overlay;
-  public overlayVisible = false;
-  public selectedSensor: ISensor;
+  public highlightLayer: VectorLayer;
+  public highlightSource: VectorSource;
 
   public activeWmsDatasets: Dataset[] = [];
   public activeWmtsDatasets: Dataset[] = [];
@@ -56,32 +59,33 @@ export class MapComponent implements OnInit {
   public locateMeString = `Locate me`;
   public geoLocationNotSupportedString = `Geolocation is not supported by this browser.`;
 
-  public showOverlay(coordinates) {
-    this.overlayVisible = true;
-    this.popupOverlay.setPosition(coordinates);
-    this.popupOverlay.getElement().classList.remove('hidden');
-  }
-
-  public hideOverlay() {
-    this.overlayVisible = false;
-    this.popupOverlay.getElement().classList.add('hidden');
-  }
-
   public handleEvent(event: SearchComponentEvent) {
     this.mapService.zoomToPdokResult(event, this.mapName);
   }
 
   public handleMapEvents(mapEvent: MapComponentEvent) {
     if (mapEvent.type === MapComponentEventTypes.SINGLECLICK) {
-      this.hideOverlay();
+      this.removeHighlight();
     }
   }
 
-  public handleWmsEvents(event: MapComponentEvent, layerName: string) {
+  public handleWmsEvents(event: MapComponentEvent, _: string) {
     if (event.type === MapComponentEventTypes.WMSFEATUREINFO) {
       if (event.value.length) {
-        this.selectedSensor = event.value[0].values_;
-        this.showOverlay(event.value[0].values_.geometry.flatCoordinates);
+        const geometry = new Feature({
+          geometry: event.value[0].values_.geometry,
+        });
+        this.highlightFeature(geometry);
+
+        const sensorFeatures = event.value.map((e) => e.values_);
+        for (const feature of sensorFeatures) {
+          const epsgCoords = [feature.geometry.flatCoordinates[0], feature.geometry.flatCoordinates[1]];
+          const location = proj4(this.epsgRD, this.epsgWGS84, epsgCoords);
+          const height = feature.geometry.flatCoordinates.length > 2 ? feature.geometry.flatCoordinates[2] : null
+          feature.location = [location[0], location[1], height];
+        }
+
+        this.modalService.showSensors(sensorFeatures, this.modalService.btnCancelText, 'lg').then();
       }
     }
   }
@@ -106,6 +110,31 @@ export class MapComponent implements OnInit {
         this.activeWmtsDatasets = this.activeWmtsDatasets.filter((dataset) => dataset.services.length > 0);
       }
     }
+  }
+
+  public highlightFeature(feature: Feature) {
+    this.mapService.getMap(this.mapName).removeLayer(this.highlightLayer);
+    this.highlightSource = new VectorSource({
+      features: [feature],
+    });
+    this.highlightLayer = new VectorLayer({
+      source: this.highlightSource,
+      style: [new Style({
+        image: new CircleStyle({
+          radius: 20,
+          stroke: new Stroke({
+            color: '#FF0000',
+            width: 2,
+          }),
+        }),
+      })], opacity: 0.7,
+    });
+    this.highlightLayer.setZIndex(20);
+    this.mapService.getMap(this.mapName).addLayer(this.highlightLayer);
+  }
+
+  public removeHighlight() {
+    this.mapService.getMap(this.mapName).removeLayer(this.highlightLayer);
   }
 
   private zoomToPoint(point: Point) {
@@ -150,15 +179,14 @@ export class MapComponent implements OnInit {
       this.myLayers = data as Theme[];
     }, () => {}));
 
-    this.popupOverlay = new Overlay({
-      autoPan: false,
-      positioning: OverlayPositioning.BOTTOM_CENTER,
-      element: document.getElementById('popup')
-    });
-    this.mapService.getMap(this.mapName).addOverlay(this.popupOverlay);
-
     if (window.location.protocol === 'https') {
       this.addFindMeButton();
+    }
+  }
+
+  ngOnDestroy(): void {
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
     }
   }
 }

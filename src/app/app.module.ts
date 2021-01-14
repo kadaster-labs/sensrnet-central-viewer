@@ -14,11 +14,14 @@ import { AppComponent } from './app.component';
 import { ViewerComponent } from './viewer/viewer.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { MapComponent } from './components/map/map.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { ModalService } from './services/modal.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
+    ModalComponent,
     NavBarComponent,
     ViewerComponent,
   ],
@@ -33,6 +36,9 @@ import { MapComponent } from './components/map/map.component';
     GgcDatasetLegendModule,
     HttpClientModule,
     NgbModule,
+  ],
+  providers: [
+    ModalService,
   ],
   bootstrap: [
     AppComponent,

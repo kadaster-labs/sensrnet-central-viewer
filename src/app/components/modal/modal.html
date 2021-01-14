@@ -1,0 +1,97 @@
+<div class="modal-header">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+        <li *ngFor="let step of navigationSteps; let i = index" class="nav-item">
+            <a [class.active]="selectedNavIndex === i" (click)="setSelectedNavIndex(i)" class="nav-link pointer" role="tab" aria-controls="pills-home">
+                {{ step }}
+            </a>
+        </li>
+    </ul>
+    <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <table [ngClass]="{'table-striped': selectedNavIndex !== 0}" class="table table-sm mb-0">
+        <thead class="sr-only sr-only-focusable">
+            <tr>
+                <th scope="col" i18n>Attribute</th>
+                <th scope="col" i18n>Value</th>
+            </tr>
+        </thead>
+        <tbody *ngIf="selectedNavIndex === 0">
+            <tr *ngFor="let sensor of sensors; let i = index" (click)="setSelectedSensorIndex(i)" [class.table-active]="selectedSensorIndex === i" class="pointer">
+                <td><strong>{{ sensor.name }}</strong></td>
+                <td>{{ sensor.category }}</td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="selectedNavIndex === 1">
+            <tr>
+                <td><strong>Name</strong></td>
+                <td>{{ sensors[selectedSensorIndex].name }}</td>
+            </tr>
+            <tr>
+                <td><strong>Category</strong></td>
+                <td>{{ sensors[selectedSensorIndex].category }}</td>
+            </tr>
+            <tr>
+                <td><strong>Type</strong></td>
+                <td>{{ sensors[selectedSensorIndex].typeName }}</td>
+            </tr>
+            <tr>
+                <td><strong>Active</strong></td>
+                <td>
+                    <input type="checkbox" id="selected-sensor-active" class="pt-2 pb-0 my-0"
+                           [checked]="sensors[selectedSensorIndex].active" disabled>
+                </td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="selectedNavIndex === 2">
+            <tr>
+                <td><strong>Aim</strong></td>
+                <td>{{ sensors[selectedSensorIndex].aim }}</td>
+            </tr>
+            <tr>
+                <td><strong>Description</strong></td>
+                <td>{{ sensors[selectedSensorIndex].description }}</td>
+            </tr>
+            <tr>
+                <td><strong>Manufacturer</strong></td>
+                <td>{{ sensors[selectedSensorIndex].manufacturer }}</td>
+            </tr>
+            <tr>
+                <td><strong>Documentation URL</strong></td>
+                <td>{{ sensors[selectedSensorIndex].documentationUrl }}</td>
+            </tr>
+            <tr>
+                <td><strong>Themes</strong></td>
+                <td>{{ getThemes(sensors[selectedSensorIndex]) }}</td>
+            </tr>
+        </tbody>
+        <tbody *ngIf="selectedNavIndex === 3">
+            <ng-container *ngFor="let dataStream of getDataStreams(sensors[selectedSensorIndex]); let i = index">
+                <tr>
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td><strong>Name</strong></td>
+                    <td><strong>{{ dataStream.name }}</strong></td>
+                </tr>
+            </ng-container>
+        </tbody>
+        <tbody *ngIf="selectedNavIndex === 4">
+            <tr>
+                <td><strong>Longitude</strong></td>
+                <td>{{ sensors[selectedSensorIndex].location[0] }}</td>
+            </tr>
+            <tr>
+                <td><strong>Latitude</strong></td>
+                <td>{{ sensors[selectedSensorIndex].location[1] }}</td>
+            </tr>
+            <tr>
+                <td><strong>Height</strong></td>
+                <td>{{ sensors[selectedSensorIndex].location[2] }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger mb-0" (click)="decline()">{{ btnCancelText }}</button>
+</div>
