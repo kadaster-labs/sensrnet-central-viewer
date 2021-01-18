@@ -7,7 +7,7 @@ export class AppComponent {
   constructor(
     private titleService: Title,
   ) {
-    this.setTitle('Sensorenregister');
+    this.setTitle('Central Viewer');
   }
 
   public setTitle(newTitle: string) {

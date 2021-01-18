@@ -13,6 +13,7 @@
                 "name": "Sensors",
                 "technicalName": "sensors",
                 "minResolution": 0.000102539,
+                "maxResolution": 500,
                 "active": true,
                 "legendUrl": null,
                 "zIndex": 7

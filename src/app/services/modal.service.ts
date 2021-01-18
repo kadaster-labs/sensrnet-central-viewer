@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
+import { ISensor } from '../model/bodies/sensor-body';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NavigationStart, Router } from '@angular/router';
 import { ModalComponent } from '../components/modal/modal.component';
-import {ISensor} from "../model/bodies/sensor-body";
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {

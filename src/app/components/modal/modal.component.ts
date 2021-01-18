@@ -30,7 +30,7 @@ export class ModalComponent {
     return sensor.theme ? sensor.theme.substring(1, sensor.theme.length - 1) : '';
   }
 
-  public getDataStreams(sensor: Record<string, any>): Record<string, any>[] {
+  public getDataStreams(sensor: Record<string, any>) {
     return sensor.dataStreams ? JSON.parse(sensor.dataStreams) : [];
   }
 

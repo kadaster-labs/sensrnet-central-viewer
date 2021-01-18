@@ -69,7 +69,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }
   }
 
-  public handleWmsEvents(event: MapComponentEvent, _: string) {
+  public async handleWmsEvents(event: MapComponentEvent, _: string) {
     if (event.type === MapComponentEventTypes.WMSFEATUREINFO) {
       if (event.value.length) {
         const geometry = new Feature({
@@ -81,11 +81,15 @@ export class MapComponent implements OnInit, OnDestroy {
         for (const feature of sensorFeatures) {
           const epsgCoords = [feature.geometry.flatCoordinates[0], feature.geometry.flatCoordinates[1]];
           const location = proj4(this.epsgRD, this.epsgWGS84, epsgCoords);
-          const height = feature.geometry.flatCoordinates.length > 2 ? feature.geometry.flatCoordinates[2] : null
+          const height = feature.geometry.flatCoordinates.length > 2 ? feature.geometry.flatCoordinates[2] : null;
           feature.location = [location[0], location[1], height];
         }
 
-        this.modalService.showSensors(sensorFeatures, this.modalService.btnCancelText, 'lg').then();
+        try {
+          await this.modalService.showSensors(sensorFeatures, this.modalService.btnCancelText, 'lg');
+        } catch {
+          console.log('Modal has been closed');
+        }
       }
     }
   }
@@ -178,6 +182,7 @@ export class MapComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.httpClient.get('/assets/layers.json').subscribe((data) => {
       this.myLayers = data as Theme[];
     }, () => {}));
+
 
     if (window.location.protocol === 'https') {
       this.addFindMeButton();

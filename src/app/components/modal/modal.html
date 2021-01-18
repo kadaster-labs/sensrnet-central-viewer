@@ -11,86 +11,154 @@
     </button>
 </div>
 <div class="modal-body">
-    <table [ngClass]="{'table-striped': selectedNavIndex !== 0}" class="table table-sm mb-0">
-        <thead class="sr-only sr-only-focusable">
+    <table *ngIf="selectedNavIndex === 0" class="table table-sm mb-0">
+        <thead>
             <tr>
-                <th scope="col" i18n>Attribute</th>
-                <th scope="col" i18n>Value</th>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
             </tr>
         </thead>
-        <tbody *ngIf="selectedNavIndex === 0">
+        <tbody >
             <tr *ngFor="let sensor of sensors; let i = index" (click)="setSelectedSensorIndex(i)" [class.table-active]="selectedSensorIndex === i" class="pointer">
+                <th scope="row">
+                    <input [checked]="selectedSensorIndex === i" type="radio" name="customRadio" class="form-check-input">
+                    <label class="form-check-label"></label>
+                </th>
                 <td><strong>{{ sensor.name }}</strong></td>
                 <td>{{ sensor.category }}</td>
             </tr>
         </tbody>
-        <tbody *ngIf="selectedNavIndex === 1">
-            <tr>
-                <td><strong>Name</strong></td>
-                <td>{{ sensors[selectedSensorIndex].name }}</td>
-            </tr>
-            <tr>
-                <td><strong>Category</strong></td>
-                <td>{{ sensors[selectedSensorIndex].category }}</td>
-            </tr>
-            <tr>
-                <td><strong>Type</strong></td>
-                <td>{{ sensors[selectedSensorIndex].typeName }}</td>
-            </tr>
-            <tr>
-                <td><strong>Active</strong></td>
-                <td>
-                    <input type="checkbox" id="selected-sensor-active" class="pt-2 pb-0 my-0"
-                           [checked]="sensors[selectedSensorIndex].active" disabled>
-                </td>
-            </tr>
-        </tbody>
-        <tbody *ngIf="selectedNavIndex === 2">
-            <tr>
-                <td><strong>Aim</strong></td>
-                <td>{{ sensors[selectedSensorIndex].aim }}</td>
-            </tr>
-            <tr>
-                <td><strong>Description</strong></td>
-                <td>{{ sensors[selectedSensorIndex].description }}</td>
-            </tr>
-            <tr>
-                <td><strong>Manufacturer</strong></td>
-                <td>{{ sensors[selectedSensorIndex].manufacturer }}</td>
-            </tr>
-            <tr>
-                <td><strong>Documentation URL</strong></td>
-                <td>{{ sensors[selectedSensorIndex].documentationUrl }}</td>
-            </tr>
-            <tr>
-                <td><strong>Themes</strong></td>
-                <td>{{ getThemes(sensors[selectedSensorIndex]) }}</td>
-            </tr>
-        </tbody>
-        <tbody *ngIf="selectedNavIndex === 3">
-            <ng-container *ngFor="let dataStream of getDataStreams(sensors[selectedSensorIndex]); let i = index">
-                <tr>
-                    <th scope="row">{{ i + 1 }}</th>
-                    <td><strong>Name</strong></td>
-                    <td><strong>{{ dataStream.name }}</strong></td>
-                </tr>
-            </ng-container>
-        </tbody>
-        <tbody *ngIf="selectedNavIndex === 4">
-            <tr>
-                <td><strong>Longitude</strong></td>
-                <td>{{ sensors[selectedSensorIndex].location[0] }}</td>
-            </tr>
-            <tr>
-                <td><strong>Latitude</strong></td>
-                <td>{{ sensors[selectedSensorIndex].location[1] }}</td>
-            </tr>
-            <tr>
-                <td><strong>Height</strong></td>
-                <td>{{ sensors[selectedSensorIndex].location[2] }}</td>
-            </tr>
-        </tbody>
     </table>
+    <ng-container *ngIf="[1, 2, 4].includes(selectedNavIndex)">
+        <table class="table table-sm table-striped mb-0">
+            <caption class="sr-only sr-only-focusable" i18n>Sensor details</caption>
+            <thead class="sr-only sr-only-focusable">
+                <tr>
+                    <th scope="col" i18n>Attribute</th>
+                    <th scope="col" i18n>Value</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="selectedNavIndex === 1" >
+                <tr>
+                    <td><strong>Name</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Category</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].category }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Type</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].typeName }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Active</strong></td>
+                    <td>
+                        <input [checked]="sensors[selectedSensorIndex].active" type="checkbox" id="selected-sensor-active"
+                               class="pt-2 pb-0 my-0" disabled>
+                    </td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="selectedNavIndex === 2">
+                <tr>
+                    <td><strong>Aim</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].aim }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Description</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].description }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Manufacturer</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].manufacturer }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Documentation URL</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].documentationUrl }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Themes</strong></td>
+                    <td>{{ getThemes(sensors[selectedSensorIndex]) }}</td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="selectedNavIndex === 4">
+                <tr>
+                    <td><strong>Longitude</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].location[0] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Latitude</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].location[1] }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Height</strong></td>
+                    <td>{{ sensors[selectedSensorIndex].location[2] }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </ng-container>
+    <div *ngIf="selectedNavIndex === 3">
+        <div *ngFor="let dataStream of getDataStreams(sensors[selectedSensorIndex]); let i = index" class="card mb-1">
+            <div class="card-body">
+                <h5 class="card-title mb-0">{{ dataStream.name }}</h5>
+                <div class="card-body m-1">
+                    <div class="row">
+                        <div *ngIf="dataStream.reason !== undefined" class="col-12">
+                            <label><span>Reason</span></label>
+                            <input value="{{ dataStream.reason }}" type="text" class="form-control" readonly>
+                        </div>
+                        <div *ngIf="dataStream.description !== undefined" class="col-12">
+                            <label><span>Description</span></label>
+                            <input value="{{ dataStream.description }}" type="text" class="form-control" readonly>
+                        </div>
+                        <div *ngIf="dataStream.observedProperty !== undefined" class="col-12">
+                            <label><span>Observed Property</span></label>
+                            <input value="{{ dataStream.observedProperty }}" type="text" class="form-control" readonly>
+                        </div>
+                        <div *ngIf="dataStream.isPublic !== undefined" class="col-md-4 mt-1 text-left">
+                            <label>
+                                <input [checked]="dataStream.isPublic" type="checkbox" class="mr-2" readonly>
+                                <span>Is Public</span>
+                            </label>
+                        </div>
+                        <div *ngIf="dataStream.isOpenData !== undefined" class="col-md-4 mt-1 text-center">
+                            <label>
+                                <input [checked]="dataStream.isOpenData" type="checkbox" class="mr-2" readonly>
+                                <span>Is Open Data</span>
+                            </label>
+                        </div>
+                        <div *ngIf="dataStream.isReusable !== undefined" class="col-md-4 mt-1 text-right">
+                            <label>
+                                <input [checked]="dataStream.isReusable" type="checkbox" class="mr-2" readonly>
+                                <span>Is Reusable</span>
+                            </label>
+                        </div>
+                        <div *ngIf="dataStream.documentationUrl !== undefined" class="col-12">
+                            <label><span>Documentation</span></label>
+                            <input value="{{ dataStream.documentationUrl }}" type="text" class="form-control" readonly>
+                        </div>
+                        <div *ngIf="dataStream.dataLink !== undefined" class="col-12">
+                            <label><span>Datalink</span></label>
+                            <input value="{{ dataStream.dataLink }}" type="text" class="form-control" readonly>
+                        </div>
+                        <div *ngIf="dataStream.unitOfMeasurement !== undefined" class="col-12">
+                            <label><span>Unit of measurement</span></label>
+                            <input value="{{ dataStream.unitOfMeasurement }}" type="text" class="form-control" readonly>
+                        </div>
+                        <div *ngIf="dataStream.dataFrequency !== undefined" class="col-12">
+                            <label><span>Data Frequency / s</span></label>
+                            <input value="{{ dataStream.dataFrequency }}" type="number" class="form-control" readonly>
+                        </div>
+                        <div *ngIf="dataStream.dataQuality !== undefined" class="col-12">
+                            <label>Data Quality (worst - best)</label>
+                            <input value="{{ dataStream.dataQuality }}" type="range" step=0.01 min="0" max="1" placeholder="Quality" class="form-control p-0" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-danger mb-0" (click)="decline()">{{ btnCancelText }}</button>
