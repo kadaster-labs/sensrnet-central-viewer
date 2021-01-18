@@ -4,7 +4,10 @@ kind: Kustomization
 bases:
 - ../../base
 
-namespace: local
+namespace: viewer
+
+commonLabels:
+  environment: viewer
 
 patchesStrategicMerge:
 - deployment.yaml
