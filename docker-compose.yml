@@ -1,15 +1,10 @@
 version: '3.7'
 
-networks:
-  backend:
-    name: backend
-    driver: bridge
-
 services:
   central-viewer:
     build:
         context: "."
+    environment:
+      - GEOSERVER_URL=http://localhost:8082/geoserver/sensrnet/ows
     ports:
       - 8080:8080
-    networks:
-      - backend
