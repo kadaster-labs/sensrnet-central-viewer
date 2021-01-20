@@ -2,7 +2,26 @@
   {
     "themeName": "Lagen",
     "datasets": [
-     
+      {
+        "datasetName": "sensrnet",
+        "services": [
+          {
+            "type": "wms",
+            "url": "sensrnet-geoserver",
+            "layers": [
+              {
+                "name": "Sensors",
+                "technicalName": "sensors",
+                "minResolution": 0.000102539,
+                "maxResolution": 500,
+                "active": true,
+                "legendUrl": null,
+                "zIndex": 7
+              }
+            ]
+          }
+        ]
+      },
       {
         "datasetName": "Luchtfoto",
         "services": [
