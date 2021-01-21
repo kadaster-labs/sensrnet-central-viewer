@@ -16,7 +16,7 @@ spec:
         app: central-viewer
     spec:
       containers:
-      - image: sensrnetnl/central-viewer:0.1.0
+      - image: sensrnetnl/central-viewer:0.2.0
         name: central-viewer
         env:
         - name: GEOSERVER_URL
