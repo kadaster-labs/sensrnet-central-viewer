@@ -18,6 +18,9 @@ spec:
       containers:
       - image: sensrnetnl/central-viewer:0.1.0
         name: central-viewer
+        env:
+        - name: GEOSERVER_URL
+          value: /geoserver/sensrnet/ows
         ports:
         - containerPort: 8080
         resources: {}
