@@ -17,9 +17,6 @@ export interface Datastream {
   description: string;
   unitOfMeasurement: object;
   observedArea: any;
-  observationType?: any;
-  phenomenonTime?: any;
-  resultTime?: any;
 
   theme: DatastreamTheme[];
   dataQuality: string;
@@ -30,7 +27,6 @@ export interface Datastream {
   isReusable: boolean;
   documentation: string;
   dataLink: string;
-  dataClassification?: string;
 
   observationGoals?: ObservationGoal[];
 }

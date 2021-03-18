@@ -27,7 +27,6 @@ export interface Sensor {
 
   name: string;
   description: string;
-  metadata?: any;
 
   type: SensorType;
   manufacturer: string;
