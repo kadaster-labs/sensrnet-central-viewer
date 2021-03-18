@@ -1,17 +1,21 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Device } from '../../model/device';
+import { Sensor } from '../../model/sensor';
+
+import { Datastream } from '../../model/datastream';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.html',
 })
 export class ModalComponent {
-  @Input() sensors: Record<string, any>[];
+  @Input() devices: Array<Device>;
   @Input() btnCancelText: string;
 
   public selectedNavIndex = 0;
-  public selectedSensorIndex = 0;
-  public navigationSteps = ['Sensors', 'Type', 'Details', 'Data Streams', 'Location'];
+  public selectedDeviceIndex = 0;
+  public navigationSteps = ['Devices', 'Info', 'Sensors', 'Datastreams', 'Location', 'Contact'];
 
   constructor(
     private activeModal: NgbActiveModal,
@@ -21,24 +25,24 @@ export class ModalComponent {
     this.selectedNavIndex = i;
   }
 
-  public setSelectedSensorIndex(i: number): void {
-    this.selectedSensorIndex = i;
+  public setselectedDeviceIndex(i: number): void {
+    this.selectedDeviceIndex = i;
     this.selectedNavIndex = 1;
   }
 
-  public getThemes(sensor: Record<string, any>): string {
-    return sensor.theme ? sensor.theme.substring(1, sensor.theme.length - 1) : '';
-  }
-
-  public getDataStreams(sensor: Record<string, any>) {
+  public getDatastreams(sensor: Record<string, any>): Array<Datastream> {
     return sensor.dataStreams ? JSON.parse(sensor.dataStreams) : [];
   }
 
-  public decline() {
+  public getSensors(device: Record<string, any>): Array<Sensor> {
+    return device.sensors ? JSON.parse(device.sensors) : [];
+  }
+
+  public decline(): void {
     this.activeModal.close(false);
   }
 
-  public dismiss() {
+  public dismiss(): void {
     this.activeModal.dismiss();
   }
 }
