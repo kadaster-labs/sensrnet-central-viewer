@@ -29,9 +29,9 @@ export interface Sensor {
   description: string;
 
   type: SensorType;
-  manufacturer: string;
-  supplier: string;
-  documentation: string;
+  manufacturer?: string;
+  supplier?: string;
+  documentation?: string;
 
-  device: Device;
+  device?: Device;
 }

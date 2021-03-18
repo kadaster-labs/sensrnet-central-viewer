@@ -12,10 +12,10 @@ interface BaseDevice {
   _id: string;
 
   name: string;
-  description: string;
+  description?: string;
 
   category: Category;
-  connectivity: string;
+  connectivity?: string;
 
   location: DeviceLocation;
 }

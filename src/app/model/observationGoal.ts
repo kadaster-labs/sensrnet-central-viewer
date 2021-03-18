@@ -5,8 +5,8 @@ export interface ObservationGoal {
 
   name: string;
   description: string;
-  legalGround: string;
-  legalGroundLink: string;
+  legalGround?: string;
+  legalGroundLink?: string;
 
   datastreams?: Datastream[];
 }

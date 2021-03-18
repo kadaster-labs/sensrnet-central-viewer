@@ -1,7 +1,7 @@
 export interface ContactDetails {
-  name: string;
-  email: string;
-  phone: string;
+  name?: string;
+  email?: string;
+  phone?: string;
 
   isPublic: boolean;
   forRole: string;
@@ -10,7 +10,7 @@ export interface ContactDetails {
 export interface LegalEntity {
   _id: string;
   name: string;
-  website: string;
+  website?: string;
 
   contactDetails?: ContactDetails[];
 }

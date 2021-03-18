@@ -14,19 +14,19 @@ export interface Datastream {
   _id: string;
 
   name: string;
-  description: string;
-  unitOfMeasurement: object;
-  observedArea: any;
+  description?: string;
+  unitOfMeasurement?: object;
+  observedArea?: object;
 
-  theme: DatastreamTheme[];
-  dataQuality: string;
-  isActive: boolean;
-  isPublic: boolean;
-  isOpenData: boolean;
-  containsPIData: boolean;
-  isReusable: boolean;
-  documentation: string;
-  dataLink: string;
+  theme?: DatastreamTheme[];
+  dataQuality?: string;
+  isActive?: boolean;
+  isPublic?: boolean;
+  isOpenData?: boolean;
+  containsPIData?: boolean;
+  isReusable?: boolean;
+  documentation?: string;
+  dataLink?: string;
 
   observationGoals?: ObservationGoal[];
 }
