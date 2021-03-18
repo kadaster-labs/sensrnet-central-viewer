@@ -60,14 +60,6 @@
                 <td><strong>Connectivity</strong></td>
                 <td>{{ devices[selectedDeviceIndex].connectivity }}</td>
             </tr>
-            <tr *ngIf="devices[selectedDeviceIndex].networkOperator">
-                <td><strong>networkOperator</strong></td>
-                <td>{{ devices[selectedDeviceIndex].networkOperator }}</td>
-            </tr>
-            <tr *ngIf="devices[selectedDeviceIndex].powerSupply">
-                <td><strong>powerSupply</strong></td>
-                <td>{{ devices[selectedDeviceIndex].powerSupply }}</td>
-            </tr>
         </tbody>
     </table>
     <!-- Sensors -->
@@ -157,7 +149,8 @@
                         </div>
                         <div *ngIf="datastream.dataClassification !== undefined" class="col-12">
                             <label><span>Data Classification</span></label>
-                            <input value="{{ datastream.dataClassification }}" type="number" class="form-control" readonly>
+                            <input value="{{ datastream.dataClassification }}" type="number" class="form-control"
+                                readonly>
                         </div>
                     </div>
                 </div>
@@ -188,30 +181,45 @@
             </tr>
         </tbody>
     </table>
-    <!-- Location -->
-    <table *ngIf="selectedNavIndex === 5" class="table table-sm table-striped mb-0">
-        <caption class="sr-only sr-only-focusable" i18n>Sensor details</caption>
-        <thead class="sr-only sr-only-focusable">
-            <tr>
-                <th scope="col" i18n>Attribute</th>
-                <th scope="col" i18n>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><strong>Longitude</strong></td>
-                <td>{{ devices[selectedDeviceIndex].location[0] }}</td>
-            </tr>
-            <tr>
-                <td><strong>Latitude</strong></td>
-                <td>{{ devices[selectedDeviceIndex].location[1] }}</td>
-            </tr>
-            <tr>
-                <td><strong>Height</strong></td>
-                <td>{{ devices[selectedDeviceIndex].location[2] }}</td>
-            </tr>
-        </tbody>
-    </table>
+    <!-- Contact -->
+    <div *ngIf="selectedNavIndex === 5 && legalEntities | async as legalEntities">
+        <div *ngFor="let legalEntity of legalEntities; let i = index" class="card mb-1">
+            <div class="card-body">
+                <h5 class="card-title mb-0">{{ legalEntity.name }} (Owner)</h5>
+                <div class="card-body m-1">
+                    <div class="row">
+                        <div class="col-12">
+                            <label><span>Website</span></label>
+                            <input value="{{ legalEntity.website }}" type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                    <table *ngFor="let contactDetail of legalEntity.contactDetails" class="table table-sm table-striped mt-5">
+                        <caption i18n>Contact details</caption>
+                        <thead class="sr-only sr-only-focusable">
+                            <tr>
+                                <th scope="col" i18n>Attribute</th>
+                                <th scope="col" i18n>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr >
+                                <td><strong>Name</strong></td>
+                                <td>{{ contactDetail.name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>E-mail</strong></td>
+                                <td>{{ contactDetail.email }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Phone</strong></td>
+                                <td>{{ contactDetail.phone }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-danger mb-0" (click)="decline()">{{ btnCancelText }}</button>

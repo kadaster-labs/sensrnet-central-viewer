@@ -21,7 +21,7 @@ export interface Datastream {
   phenomenonTime?: any;
   resultTime?: any;
 
-  theme: Array<DatastreamTheme>;
+  theme: DatastreamTheme[];
   dataQuality: string;
   isActive: boolean;
   isPublic: boolean;
@@ -32,5 +32,5 @@ export interface Datastream {
   dataLink: string;
   dataClassification?: string;
 
-  observationGoals?: Array<ObservationGoal>;
+  observationGoals?: ObservationGoal[];
 }

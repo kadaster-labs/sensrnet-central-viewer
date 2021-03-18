@@ -1,25 +1,45 @@
-import { Component, Input } from '@angular/core';
+import { Component, DoCheck, Input, IterableDiffers } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Device } from '../../model/device';
-import { Sensor } from '../../model/sensor';
+import { Observable } from 'rxjs';
+
+import { HTTPService } from '../../services/http.service';
 
 import { Datastream } from '../../model/datastream';
+import { DeviceDTO } from '../../model/device';
+import { Sensor } from '../../model/sensor';
+import { LegalEntity } from '../../model/legalEntity';
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.html',
+  styleUrls: ['./modal.scss'],
 })
-export class ModalComponent {
-  @Input() devices: Array<Device>;
+export class ModalComponent implements DoCheck {
+  @Input() devices: DeviceDTO[];
   @Input() btnCancelText: string;
 
   public selectedNavIndex = 0;
   public selectedDeviceIndex = 0;
   public navigationSteps = ['Devices', 'Info', 'Sensors', 'Datastreams', 'Location', 'Contact'];
 
+  public legalEntities: Observable<LegalEntity[]>;
+
+  private iterableDiffer;
+
   constructor(
     private activeModal: NgbActiveModal,
-  ) {}
+    private httpService: HTTPService,
+    private iterableDiffers: IterableDiffers,
+  ) {
+    this.iterableDiffer = iterableDiffers.find([]).create(null);
+  }
+
+  ngDoCheck() {
+    const changes = this.iterableDiffer.diff(this.devices);
+    if (changes) {
+      this.getLegalEntities(this.devices[this.selectedDeviceIndex]);
+    }
+  }
 
   public setSelectedNavIndex(i: number): void {
     this.selectedNavIndex = i;
@@ -28,14 +48,20 @@ export class ModalComponent {
   public setselectedDeviceIndex(i: number): void {
     this.selectedDeviceIndex = i;
     this.selectedNavIndex = 1;
+
+    this.getLegalEntities(this.devices[i]);
   }
 
-  public getDatastreams(sensor: Record<string, any>): Array<Datastream> {
-    return sensor.dataStreams ? JSON.parse(sensor.dataStreams) : [];
+  public getDatastreams(device: DeviceDTO): Datastream[] {
+    return device.dataStreams ? JSON.parse(device.dataStreams) : [];
   }
 
-  public getSensors(device: Record<string, any>): Array<Sensor> {
+  public getSensors(device: DeviceDTO): Sensor[] {
     return device.sensors ? JSON.parse(device.sensors) : [];
+  }
+
+  public getLegalEntities(device: DeviceDTO): void {
+    this.legalEntities = this.httpService.getLegalEntities(device._id);
   }
 
   public decline(): void {

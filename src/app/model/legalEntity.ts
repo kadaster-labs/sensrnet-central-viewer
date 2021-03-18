@@ -12,5 +12,5 @@ export interface LegalEntity {
   name: string;
   website: string;
 
-  contactDetails?: Array<ContactDetails>;
+  contactDetails?: ContactDetails[];
 }

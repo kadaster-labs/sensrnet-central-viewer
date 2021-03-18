@@ -1,4 +1,4 @@
-import { Datastream } from "./datastream";
+import { Datastream } from './datastream';
 
 export interface ObservationGoal {
   _id: string;
@@ -8,5 +8,5 @@ export interface ObservationGoal {
   legalGround: string;
   legalGroundLink: string;
 
-  datastreams?: Array<Datastream>;
+  datastreams?: Datastream[];
 }

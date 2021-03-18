@@ -8,19 +8,24 @@ export enum Category {
   Camera = 'Camera',
 }
 
-export interface Device {
+interface BaseDevice {
   _id: string;
 
   name: string;
   description: string;
-  properties?: object;
 
   category: Category;
   connectivity: string;
-  networkOperator?: string;
-  powerSupply?: string;
 
   location: DeviceLocation;
-  dataStreams?: Array<Datastream>;
-  sensors?: Array<Sensor>;
+}
+
+export interface Device extends BaseDevice {
+  dataStreams?: Datastream[];
+  sensors?: Sensor[];
+}
+
+export interface DeviceDTO extends BaseDevice{
+  dataStreams?: string;
+  sensors?: string;
 }
