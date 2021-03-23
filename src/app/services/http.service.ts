@@ -13,8 +13,11 @@ export class HTTPService {
   ) { }
 
   public getLegalEntities(deviceID: Device['_id']): Observable<LegalEntity[]> {
+    const params = new HttpParams()
+      .set('deviceId', deviceID)
+      .set('allNodes', 'true');
     const options = {
-      params: new HttpParams().set('deviceId', deviceID)
+      params,
     };
 
     return this.http.get<LegalEntity[]>(`${environment.apiUrl}/legalentities`, options)
