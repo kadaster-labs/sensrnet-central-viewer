@@ -1,4 +1,4 @@
-import { DeviceLocation } from './location';
+import { DeviceLocation } from './deviceLocation';
 import { Sensor } from './sensor';
 import { Datastream } from './datastream';
 
@@ -16,17 +16,17 @@ interface BaseDevice {
 
   category: Category;
   connectivity?: string;
-
-  location: DeviceLocation;
 }
 
 export interface Device extends BaseDevice {
   dataStreams?: Datastream[];
   sensors?: Sensor[];
+  location_object: DeviceLocation;
 }
 
 // Device as returned by GeoServer. It stringifies the nested objects.
-export interface DeviceDTO extends BaseDevice{
+export interface DeviceDTO extends BaseDevice {
   dataStreams?: string;
   sensors?: string;
+  location_object: string;
 }

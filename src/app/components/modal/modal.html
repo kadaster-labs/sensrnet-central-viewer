@@ -156,7 +156,8 @@
         </div>
     </div>
     <!-- Location -->
-    <table *ngIf="selectedNavIndex === 4" class="table table-sm table-striped mb-0">
+    <table *ngIf="selectedNavIndex === 4 && getLocation(devices[selectedDeviceIndex]) as location"
+        class="table table-sm table-striped mb-0">
         <caption class="sr-only sr-only-focusable" i18n>Sensor details</caption>
         <thead class="sr-only sr-only-focusable">
             <tr>
@@ -167,15 +168,16 @@
         <tbody>
             <tr>
                 <td><strong>Longitude</strong></td>
-                <td>{{ devices[selectedDeviceIndex].location[0] }}</td>
+                <!-- show with 3 decimals minimum, 6 maximum -->
+                <td>{{ location.coordinates[0] | number: '1.3-6' }}</td>
             </tr>
             <tr>
                 <td><strong>Latitude</strong></td>
-                <td>{{ devices[selectedDeviceIndex].location[1] }}</td>
+                <td>{{ location.coordinates[1] | number: '1.3-6' }}</td>
             </tr>
-            <tr>
+            <tr *ngIf="location.coordinates[2]">
                 <td><strong>Height</strong></td>
-                <td>{{ devices[selectedDeviceIndex].location[2] }}</td>
+                <td>{{ location.coordinates[2] | number: '1.0-2' }} meter</td>
             </tr>
         </tbody>
     </table>

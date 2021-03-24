@@ -1,6 +1,5 @@
 export interface DeviceLocation {
   type: 'Point';
-  /** [latitude, longitude, height] */
+  /** [longitude, latitude, height] */
   coordinates: [number, number, number];
-  baseObjectId: string;
 }
