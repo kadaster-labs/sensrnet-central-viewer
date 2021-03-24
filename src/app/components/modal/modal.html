@@ -87,7 +87,8 @@
                         </div>
                         <div *ngIf="sensor.documentation" class="col-12">
                             <label><span>Documentation</span></label>
-                            <input value="{{ sensor.documentation }}" type="text" class="form-control" readonly>
+                            <a href="{{ sensor.documentation }}" type="text" class="form-control"
+                                readonly target="_blank">{{ sensor.documentation }}</a>
                         </div>
                     </div>
                 </div>
@@ -141,11 +142,13 @@
                         </div>
                         <div *ngIf="datastream.documentation" class="col-12">
                             <label><span>Documentation</span></label>
-                            <input value="{{ datastream.documentation }}" type="text" class="form-control" readonly>
+                            <a href="{{ datastream.documentation }}" type="text" class="form-control"
+                                readonly target="_blank">{{ datastream.documentation }}</a>
                         </div>
                         <div *ngIf="datastream.dataLink" class="col-12">
                             <label><span>Datalink</span></label>
-                            <input value="{{ datastream.dataLink }}" type="text" class="form-control" readonly>
+                            <a href="{{ datastream.dataLink }}" type="text" class="form-control"
+                                readonly target="_blank">{{ datastream.dataLink }}</a>
                         </div>
                     </div>
                 </div>
@@ -185,10 +188,12 @@
                     <div class="row">
                         <div class="col-12">
                             <label><span>Website</span></label>
-                            <input value="{{ legalEntity.website }}" type="text" class="form-control" readonly>
+                            <a href="{{ legalEntity.website }}" type="text" class="form-control"
+                                readonly target="_blank">{{ legalEntity.website }}</a>
                         </div>
                     </div>
-                    <table *ngFor="let contactDetail of legalEntity.contactDetails" class="table table-sm table-striped mt-5">
+                    <table *ngFor="let contactDetail of legalEntity.contactDetails"
+                        class="table table-sm table-striped mt-5">
                         <caption i18n>Contact details</caption>
                         <thead class="sr-only sr-only-focusable">
                             <tr>
@@ -197,7 +202,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr >
+                            <tr>
                                 <td><strong>Name</strong></td>
                                 <td>{{ contactDetail.name }}</td>
                             </tr>
