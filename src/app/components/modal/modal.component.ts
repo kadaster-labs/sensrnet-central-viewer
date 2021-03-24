@@ -6,6 +6,7 @@ import { HTTPService } from '../../services/http.service';
 
 import { Datastream } from '../../model/datastream';
 import { DeviceDTO } from '../../model/device';
+import { DeviceLocation } from '../../model/deviceLocation';
 import { Sensor } from '../../model/sensor';
 import { LegalEntity } from '../../model/legalEntity';
 
@@ -58,6 +59,10 @@ export class ModalComponent implements DoCheck {
 
   public getSensors(device: DeviceDTO): Sensor[] {
     return device.sensors ? JSON.parse(device.sensors) : [];
+  }
+
+  public getLocation(device: DeviceDTO): DeviceLocation {
+    return JSON.parse(device.location_object);
   }
 
   public getLegalEntities(device: DeviceDTO): void {
