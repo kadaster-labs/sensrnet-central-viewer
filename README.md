@@ -33,11 +33,6 @@ Before starting with development, you'll need the following things:
 
 The VS Code editor with ESLint plugin is recommended, but not required.
 
-## Project structure
-The project is roughly structured as follows: it contains 3 pages. The two secondary ones are the user login and register pages. The main one is the viewer, which contains a map displaying all registered sensors. Additionally, the viewer is used to update owner information, and register and update sensors.
-
-Information management is mostly done by filling in forms, for which we use Angular Reactive Forms. Some of the input fields have been isolated into component for easier testing and code reuse. The main forms are `sensor-register`, `sensor-update` and `owner-update`, with smaller components being defined in `src/app/form-controls/`.
-
 ## Local development
 Running `npm run start` starts an Angular development server. Navigate to http://localhost:4200/ to view the site. The app will automatically reload if you change any of the source files.
 

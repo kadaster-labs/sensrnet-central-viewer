@@ -10,8 +10,8 @@
             "url": "sensrnet-geoserver",
             "layers": [
               {
-                "name": "Sensors",
-                "technicalName": "sensors",
+                "name": "Devices",
+                "technicalName": "devices",
                 "minResolution": 0.000102539,
                 "maxResolution": 500,
                 "active": true,

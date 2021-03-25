@@ -1,7 +1,12 @@
 {
-   "/sensrnet-geoserver": {
-      "target": "http://localhost:8082/geoserver/sensrnet/ows",
-      "secure": false,
-      "logLevel": "debug"
-   }
+  "/sensrnet-geoserver": {
+    "target": "http://localhost:8082/geoserver/sensrnet/ows",
+    "secure": false,
+    "logLevel": "debug"
+  },
+  "/api": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "logLevel": "debug"
+  }
 }

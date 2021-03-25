@@ -16,6 +16,7 @@ import { NavBarComponent } from './components/navbar/navbar.component';
 import { MapComponent } from './components/map/map.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { ModalService } from './services/modal.service';
+import { HTTPService } from './services/http.service';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ModalService } from './services/modal.service';
   ],
   providers: [
     ModalService,
+    HTTPService,
   ],
   bootstrap: [
     AppComponent,

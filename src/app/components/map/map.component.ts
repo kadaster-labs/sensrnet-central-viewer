@@ -77,8 +77,8 @@ export class MapComponent implements OnInit, OnDestroy {
         });
         this.highlightFeature(geometry);
 
-        const sensorFeatures = event.value.map((e) => e.values_);
-        for (const feature of sensorFeatures) {
+        const deviceFeatures = event.value.map((e) => e.values_);
+        for (const feature of deviceFeatures) {
           const epsgCoords = [feature.geometry.flatCoordinates[0], feature.geometry.flatCoordinates[1]];
           const location = proj4(this.epsgRD, this.epsgWGS84, epsgCoords);
           const height = feature.geometry.flatCoordinates.length > 2 ? feature.geometry.flatCoordinates[2] : null;
@@ -86,7 +86,7 @@ export class MapComponent implements OnInit, OnDestroy {
         }
 
         try {
-          await this.modalService.showSensors(sensorFeatures, this.modalService.btnCancelText, 'lg');
+          await this.modalService.showDevices(deviceFeatures, this.modalService.btnCancelText, 'lg');
         } catch {
           console.log('Modal has been closed');
         }
@@ -184,7 +184,7 @@ export class MapComponent implements OnInit, OnDestroy {
     }, () => {}));
 
 
-    if (window.location.protocol === 'https') {
+    if (window.location.protocol === 'https:') {
       this.addFindMeButton();
     }
   }
