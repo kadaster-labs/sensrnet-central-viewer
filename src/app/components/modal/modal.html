@@ -151,6 +151,34 @@
                                 readonly target="_blank">{{ datastream.dataLink }}</a>
                         </div>
                     </div>
+                    <table *ngFor="let observationGoalId of datastream.observationGoalIds"
+                           class="table table-sm table-striped mt-5">
+                        <caption i18n>Legal ground</caption>
+                        <thead class="sr-only sr-only-focusable">
+                        <tr>
+                            <th scope="col" i18n>Attribute</th>
+                            <th scope="col" i18n>Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Name</strong></td>
+                                <td>{{ observationGoalsMap.get(observationGoalId).name }}</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Description</strong></td>
+                                <td>{{ observationGoalsMap.get(observationGoalId).description }}</td>
+                            </tr>
+                            <tr *ngIf="observationGoalsMap.get(observationGoalId).legalGround">
+                                <td><strong>legalGround</strong></td>
+                                <td>{{ observationGoalsMap.get(observationGoalId).legalGround }}</td>
+                            </tr>
+                            <tr *ngIf="observationGoalsMap.get(observationGoalId).legalGroundLink">
+                                <td><strong>legalGroundLink</strong></td>
+                                <td>{{ observationGoalsMap.get(observationGoalId).legalGroundLink }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

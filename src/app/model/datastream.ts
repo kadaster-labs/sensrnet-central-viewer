@@ -28,5 +28,5 @@ export interface Datastream {
   documentation?: string;
   dataLink?: string;
 
-  observationGoals?: ObservationGoal[];
+  observationGoalIds?: ObservationGoal['_id'];
 }

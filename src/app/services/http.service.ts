@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment';
 import { LegalEntity } from '../model/legalEntity';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ObservationGoal } from '../model/observationGoal';
 
 @Injectable({ providedIn: 'root' })
 export class HTTPService {
@@ -23,6 +24,15 @@ export class HTTPService {
     return this.http.get<LegalEntity[]>(`${environment.apiUrl}/legalentities`, options)
       .pipe(
         catchError(this.handleError<LegalEntity[]>([]))
+      );
+  }
+
+  public getObservationGoals(id: ObservationGoal['_id']): Observable<ObservationGoal> {
+    const url = `${environment.apiUrl}/observationgoal/${id}`;
+
+    return this.http.get<ObservationGoal>(url)
+      .pipe(
+        catchError(this.handleError<ObservationGoal>(undefined))
       );
   }
 
