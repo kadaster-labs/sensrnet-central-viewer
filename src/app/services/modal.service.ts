@@ -6,8 +6,7 @@ import { ModalComponent } from '../components/modal/modal.component';
 
 @Injectable({ providedIn: 'root' })
 export class ModalService {
-
-  public btnCancelText = `Close`;
+  public btnCancelText = $localize`Close`;
 
   constructor(
     private router: Router,

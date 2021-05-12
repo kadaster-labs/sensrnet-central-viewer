@@ -5,6 +5,6 @@ services:
     build:
         context: "."
     environment:
-      - GEOSERVER_URL=http://localhost:8082/geoserver/sensrnet/ows
+      - GEOSERVER_URL=http://localhost:8082/geoserver/wfs
     ports:
       - 8080:8080

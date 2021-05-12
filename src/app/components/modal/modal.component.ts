@@ -1,4 +1,4 @@
-import { Component, DoCheck, Input, IterableDiffers } from '@angular/core';
+import { Component, DoCheck, Input, IterableDiffers, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 
@@ -16,13 +16,14 @@ import { ObservationGoal } from '../../model/observationGoal';
   templateUrl: './modal.html',
   styleUrls: ['./modal.scss'],
 })
-export class ModalComponent implements DoCheck {
+export class ModalComponent implements OnInit, DoCheck {
   @Input() devices: DeviceDTO[];
   @Input() btnCancelText: string;
 
   public selectedNavIndex = 0;
   public selectedDeviceIndex = 0;
-  public navigationSteps = ['Devices', 'Info', 'Sensors', 'Datastreams', 'Location', 'Contact'];
+  public navigationSteps = [$localize`Devices`, $localize`Info`, $localize`Sensors`, $localize`Datastreams`,
+    $localize`Location`, $localize`Contact`];
 
   public legalEntities: Observable<LegalEntity[]>;
   public observationGoalsMap = new Map<ObservationGoal['_id'], ObservationGoal>();
@@ -94,5 +95,9 @@ export class ModalComponent implements DoCheck {
         }
       }
     }
+  }
+
+  ngOnInit(): void {
+    this.selectedNavIndex = this.devices.length === 1 ? 1 : 0;
   }
 }
