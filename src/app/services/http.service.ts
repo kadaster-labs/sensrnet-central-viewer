@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Device } from '../model/device';
-import { environment } from '../../environments/environment';
 import { LegalEntity } from '../model/legalEntity';
 import { Observable, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { ObservationGoal } from '../model/observationGoal';
+import { EnvService } from './env.service';
 
 @Injectable({ providedIn: 'root' })
 export class HTTPService {
   constructor(
+    private env: EnvService,
     private http: HttpClient,
   ) { }
 
@@ -21,14 +22,14 @@ export class HTTPService {
       params,
     };
 
-    return this.http.get<LegalEntity[]>(`${environment.apiUrl}/legalentities`, options)
+    return this.http.get<LegalEntity[]>(`${this.env.apiUrl}/legalentities`, options)
       .pipe(
         catchError(this.handleError<LegalEntity[]>([]))
       );
   }
 
   public getObservationGoals(id: ObservationGoal['_id']): Observable<ObservationGoal> {
-    const url = `${environment.apiUrl}/observationgoal/${id}`;
+    const url = `${this.env.apiUrl}/observationgoal/${id}`;
 
     return this.http.get<ObservationGoal>(url)
       .pipe(

@@ -1,20 +1,34 @@
 import proj4 from 'proj4';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import ResizeObserver from 'resize-observer-polyfill';
+import { EnvService } from '../../services/env.service';
+import { Component, OnInit, Input, OnDestroy, HostBinding, ElementRef } from '@angular/core';
 
+import OlMap from 'ol/Map';
 import Feature from 'ol/Feature';
 import Point from 'ol/geom/Point';
+import { MapBrowserEvent } from 'ol';
+import { Cluster } from 'ol/source';
+import { FitOptions } from 'ol/View';
 import Stroke from 'ol/style/Stroke';
+import { MultiPoint } from 'ol/geom';
+import GeoJSON from 'ol/format/GeoJSON';
+import Geometry from 'ol/geom/Geometry';
 import Control from 'ol/control/Control';
 import VectorLayer from 'ol/layer/Vector';
 import VectorSource from 'ol/source/Vector';
-import { Circle as CircleStyle, Style } from 'ol/style';
+import LayerSwitcher from 'ol-layerswitcher';
 
-import { SearchComponentEvent } from 'generieke-geo-componenten-search';
-import { Dataset, DatasetTreeEvent, Theme } from 'generieke-geo-componenten-dataset-tree';
-import { MapComponentEvent, MapService, MapComponentEventTypes } from 'generieke-geo-componenten-map';
+import { Category } from '../../model/sensorTypes';
+import { extend, Extent, getCenter } from 'ol/extent';
+import {bbox as bboxStrategy} from 'ol/loadingstrategy';
+import AnimatedCluster from 'ol-ext/layer/AnimatedCluster';
+import SelectCluster from 'ol-ext/interaction/SelectCluster';
+import { Circle as CircleStyle, Style, Fill, Icon, Text } from 'ol/style';
 
+import { SearchPDOK } from './searchPDOK';
+import { MapService } from './map.service';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
@@ -23,101 +37,216 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit, OnDestroy {
-  @Input() searchBarHeight;
+  @HostBinding('style.--searchBarHeight') @Input() searchBarHeight;
   @Input() clearLocationHighLight = true;
 
   constructor(
     private router: Router,
+    private env: EnvService,
+    private elementRef: ElementRef,
     private mapService: MapService,
     private httpClient: HttpClient,
     private modalService: ModalService,
   ) {}
 
-  public mapName = 'srn';
+  public clusterMaxZoom = 15;
+
+  public map: OlMap;
   public subscriptions = [];
 
   public highlightLayer: VectorLayer;
-  public highlightSource: VectorSource;
-
-  public activeWmsDatasets: Dataset[] = [];
-  public activeWmtsDatasets: Dataset[] = [];
-  public currentMapResolution: number = undefined;
+  public highlightSource: VectorSource<Geometry>;
+  public vectorSource: VectorSource<any>;
+  public clusterSource: Cluster;
+  public clusterLayer: AnimatedCluster;
+  public selectCluster: SelectCluster;
 
   private epsgRD = '+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888889 +k=0.9999079 +x_0=155000 ' +
     '+y_0=463000 +ellps=bessel +units=m +no_defs';
   private epsgWGS84 = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs';
 
-  public myLayers: Theme[];
-  public hideTreeDataset = false;
+  public locateMeString = $localize`Locate me`;
+  public geoLocationNotSupportedString = $localize`Geolocation is not supported by this browser.`;
 
-  public iconCollapsed = 'fas fa-chevron-right';
-  public iconExpanded = 'fas fa-chevron-left';
-  public iconUnchecked = 'far fa-square';
-  public iconChecked = 'far fa-check-square';
-  public iconInfoUrl = 'fas fa-info-circle';
+  public getStyleCache() {
+    const styleCache = {};
+    for (const item of Object.keys(Category)) {
+      const styleActive = [new Style({
+        image: new CircleStyle({
+          radius: 15,
+          fill: new Fill({
+            color: `rgba(19, 65, 115, 0.9)`,
+          }),
+          stroke: new Stroke({
+            color: '#fff',
+            width: 1.5
+          })
+        })
+      }), new Style({
+        image: new Icon({
+          scale: 0.25,
+          src: `/assets/icons/${item}_op.png`
+        })
+      })];
 
-  public locateMeString = `Locate me`;
-  public geoLocationNotSupportedString = `Geolocation is not supported by this browser.`;
+      for (const style of Object.values(styleActive)) {
+        style.getImage().load();
+      }
 
-  public handleEvent(event: SearchComponentEvent) {
-    this.mapService.zoomToPdokResult(event, this.mapName);
-  }
-
-  public handleMapEvents(mapEvent: MapComponentEvent) {
-    if (mapEvent.type === MapComponentEventTypes.SINGLECLICK) {
-      this.removeHighlight();
+      styleCache[item] = styleActive;
     }
+
+    return styleCache;
   }
 
-  public async handleWmsEvents(event: MapComponentEvent, _: string) {
-    if (event.type === MapComponentEventTypes.WMSFEATUREINFO) {
-      if (event.value.length) {
+  public initMap() {
+    this.map = this.mapService.getMap();
+    const mapElement = this.elementRef.nativeElement.querySelector('#map');
+    this.map.setTarget(mapElement);
+
+    const sizeObserver = new ResizeObserver(_ => this.map.updateSize());
+    sizeObserver.observe(mapElement);
+
+    this.addMapEvents();
+  }
+
+  public initFeatures() {
+    const styleCache = this.getStyleCache();
+    const styleCluster = (feature) => {
+      let style: Style[];
+
+      const FEATURES_ = feature.get('features');
+      const numberOfFeatures = FEATURES_.length;
+      if (numberOfFeatures === 1) {
+        const category = feature.get('features')[0].values_.category;
+
+        style = styleCache[category];
+      } else {
+        style = styleCache[numberOfFeatures];
+      }
+
+      if (!style) {
+        style = [new Style({
+          image: new CircleStyle({
+            radius: 15,
+            fill: new Fill({
+              color: 'rgba(19, 65, 115, 0.9)',
+            }),
+          }),
+          text: new Text({
+            text: numberOfFeatures.toString(),
+            font: 'bold 11px "Helvetica Neue", Helvetica,Arial, sans-serif',
+            fill: new Fill({
+              color: '#ffffff',
+            }),
+            textAlign: 'center',
+          }),
+        })];
+
+        styleCache[numberOfFeatures] = style;
+      }
+
+      return style;
+    };
+
+    const styleSelectedCluster = (feature) => {
+      const zoomLevel = this.map.getView().getZoom();
+      if (feature.values_.hasOwnProperty('selectclusterfeature') && zoomLevel > this.clusterMaxZoom) {
+        const category = feature.get('features')[0].values_.category;
+        return styleCache[category];
+      }
+    };
+
+    this.vectorSource = new VectorSource({
+      format: new GeoJSON(),
+      url: (extent) => {
+        return (
+          `${this.env.geoserverUrl}?service=WFS&version=1.1.0&request=GetFeature&typename=devices&` +
+          `outputFormat=application/json&srsname=EPSG:28992&bbox=${extent.join(',')},EPSG:28992`
+        );
+      },
+      strategy: bboxStrategy,
+    });
+
+    this.clusterSource = new Cluster({
+      distance: 40,
+      source: this.vectorSource
+    });
+
+    this.clusterLayer = new AnimatedCluster({
+      name: 'Cluster',
+      source: this.clusterSource,
+      style: styleCluster,
+      zIndex: 1,
+    });
+    this.map.addLayer(this.clusterLayer);
+
+    this.selectCluster = new SelectCluster({
+      pointRadius: 40,
+      style: styleCluster,
+      featureStyle: styleSelectedCluster,
+    });
+    this.map.addInteraction(this.selectCluster);
+
+    this.selectCluster.getFeatures().on('add', async event => {
+      this.removeHighlight();
+
+      const activeFeatures = event.element.get('features');
+      if (activeFeatures.length === 1) {
+        const feature = activeFeatures[0];
         const geometry = new Feature({
-          geometry: event.value[0].values_.geometry,
+          geometry: feature.values_.geometry,
         });
         this.highlightFeature(geometry);
 
-        const deviceFeatures = event.value.map((e) => e.values_);
-        for (const feature of deviceFeatures) {
-          const epsgCoords = [feature.geometry.flatCoordinates[0], feature.geometry.flatCoordinates[1]];
-          const location = proj4(this.epsgRD, this.epsgWGS84, epsgCoords);
-          const height = feature.geometry.flatCoordinates.length > 2 ? feature.geometry.flatCoordinates[2] : null;
-          feature.location = [location[0], location[1], height];
-        }
-
         try {
-          await this.modalService.showDevices(deviceFeatures, this.modalService.btnCancelText, 'lg');
+          await this.modalService.showDevices([feature.values_], this.modalService.btnCancelText, 'lg');
+          this.removeHighlight();
         } catch {
-          console.log('Modal has been closed');
+          this.removeHighlight();
         }
       }
-    }
+    });
   }
 
-  public handleDatasetTreeEvents(event: DatasetTreeEvent) {
-    if (event.type === 'layerActivated') {
-      const deactivatedService = event.value.services[0];
-      if (deactivatedService.type === 'wms') {
-        this.activeWmsDatasets.push(event.value);
-      } else if (deactivatedService.type === 'wmts') {
-        this.activeWmtsDatasets.push(event.value);
+  private onSingleClick(event: MapBrowserEvent) {
+    this.removeHighlight();
+
+    event.map.forEachFeatureAtPixel(event.pixel, (data) => {
+      const features = data.getProperties().features;
+
+      // check if feature is a cluster with multiple features
+      if (features.length < 2) {
+        return;
       }
-    } else if (event.type === 'layerDeactivated') {
-      const deactivatedService = event.value.services[0];
-      if (deactivatedService.type === 'wms') {
-        this.activeWmsDatasets = this.activeWmsDatasets.filter((dataset) =>
-          dataset.services[0].layers[0].technicalName !== deactivatedService.layers[0].technicalName);
-        this.activeWmsDatasets = this.activeWmsDatasets.filter((dataset) => dataset.services.length > 0);
-      } else if (deactivatedService.type === 'wmts') {
-        this.activeWmtsDatasets = this.activeWmtsDatasets.filter((dataset) =>
-          dataset.services[0].layers[0].technicalName !== deactivatedService.layers[0].technicalName);
-        this.activeWmtsDatasets = this.activeWmtsDatasets.filter((dataset) => dataset.services.length > 0);
+
+      // determine extent for new view
+      const extent: Extent = features[0].getGeometry().getExtent().slice(0) as Extent;
+      features.forEach((f: Feature<Geometry>) => { extend(extent, f.getGeometry().getExtent()); });
+
+      // if we're already zoomed in, zoom in no more. Setting maxZoom in fit() also does this to some extent, however,
+      // in that case the camera is also centered. Returning early here also prevents the unnecessary panning.
+      if (event.map.getView().getZoom() > this.clusterMaxZoom) {
+        return;
       }
-    }
+
+      const size = this.map.getSize();  // [width, height]
+      const fitOptions: FitOptions = {
+        duration: 1000,
+        maxZoom: this.clusterMaxZoom + 1,
+        padding: [size[1] * 0.2, size[0] * 0.2, size[1] * 0.2, size[0] * 0.2],  // up, right, down, left
+        size,
+      };
+      this.map.getView().fit(extent, fitOptions);
+    });
+  }
+
+  public addMapEvents() {
+    this.map.on('singleclick', this.onSingleClick.bind(this));
   }
 
   public highlightFeature(feature: Feature) {
-    this.mapService.getMap(this.mapName).removeLayer(this.highlightLayer);
+    this.map.removeLayer(this.highlightLayer);
     this.highlightSource = new VectorSource({
       features: [feature],
     });
@@ -131,24 +260,41 @@ export class MapComponent implements OnInit, OnDestroy {
             width: 2,
           }),
         }),
-      })], opacity: 0.7,
+      })],
+      opacity: 0.7,
+      zIndex: 2,
     });
-    this.highlightLayer.setZIndex(20);
-    this.mapService.getMap(this.mapName).addLayer(this.highlightLayer);
+
+    this.map.addLayer(this.highlightLayer);
   }
 
   public removeHighlight() {
-    this.mapService.getMap(this.mapName).removeLayer(this.highlightLayer);
+    this.map.removeLayer(this.highlightLayer);
   }
 
   private zoomToPoint(point: Point) {
-    const view = this.mapService.getMap(this.mapName).getView();
+    const view = this.map.getView();
     view.fit(point, {
-      maxZoom: 10,
+      duration: 250,
+      maxZoom: 14,
     });
   }
 
-  private zoomToPosition(position: Position) {
+  private zoomToExtent(extent: Extent) {
+    const view = this.map.getView();
+    const resolution = view.getResolutionForExtent(extent, this.map.getSize());
+    const zoom = view.getZoomForResolution(resolution);
+    const center = getCenter(extent);
+
+    setTimeout(() => {
+      view.animate({
+        center,
+        zoom: Math.min(zoom, 16)
+      });
+    }, 250);
+  }
+
+  private zoomToPosition(position: GeolocationPosition) {
     const coords = [position.coords.longitude, position.coords.latitude];
     const coordsRD = proj4(this.epsgWGS84, this.epsgRD, coords);
     const point = new Point(coordsRD);
@@ -157,7 +303,7 @@ export class MapComponent implements OnInit, OnDestroy {
 
   private findMe() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position: Position) => {
+      navigator.geolocation.getCurrentPosition((position: GeolocationPosition) => {
         this.zoomToPosition(position);
       });
     } else {
@@ -166,6 +312,11 @@ export class MapComponent implements OnInit, OnDestroy {
   }
 
   private addFindMeButton() {
+    if (window.location.protocol !== 'https:') {
+      console.warn('Geolocation only allowed over secure connections');
+      return;
+    }
+
     const locate = document.createElement('div');
     locate.className = 'ol-control ol-unselectable locate';
     locate.innerHTML = `<button title="${this.locateMeString}">◎</button>`;
@@ -173,25 +324,74 @@ export class MapComponent implements OnInit, OnDestroy {
       this.findMe();
     });
 
-    this.mapService.getMap(this.mapName).addControl(new Control({
+    this.map.addControl(new Control({
       element: locate,
     }));
   }
 
-  public async ngOnInit(): Promise<void> {
-    this.subscriptions.push(this.httpClient.get('/assets/layers.json').subscribe((data) => {
-      this.myLayers = data as Theme[];
-    }, () => {}));
+  private addLayerSwitcher(): void {
+    const layerSwitcher = new LayerSwitcher({
+      reverse: true,
+      groupSelectStyle: 'children'
+    });
 
+    this.map.addControl(layerSwitcher);
+  }
 
-    if (window.location.protocol === 'https:') {
-      this.addFindMeButton();
+  /**
+   * Adds a search button on the map which can be used to search for a location
+   * Makes use of the 'Locatieserver' of PDOK (Dutch address lookup) https://github.com/PDOK/locatieserver/wiki
+   */
+  private addSearchButton(): void {
+    const search = new SearchPDOK({
+      minLength: 1,
+      maxHistory: -1,
+      collapsed: false,
+      className: 'search-bar',
+      placeholder: $localize`Enter location`,
+    }) as any;
+    search.clearHistory();
+
+    search.on('select', (event) => {
+      let feature: Feature;
+      if (event.search instanceof Feature) {
+        feature = event.search;
+      } else {
+        const values = event.search.values_;
+        const geometry = new MultiPoint(values.geometry.flatCoordinates, values.geometry.layout);
+
+        feature = new Feature({
+          geometry,
+          name: values.name,
+          type: values.type,
+        });
+      }
+
+      this.zoomToGeometry(feature.getGeometry());
+    });
+
+    this.map.addControl(search);
+  }
+
+  private zoomToGeometry(geometry: Geometry): void {
+    if (geometry instanceof Point) {
+      this.zoomToPoint(geometry);
+    } else {
+      this.zoomToExtent(geometry.getExtent());
     }
   }
 
+  ngOnInit(): void {
+    this.initMap();
+    this.initFeatures();
+
+    this.addFindMeButton();
+    this.addSearchButton();
+    this.addLayerSwitcher();
+  }
+
   ngOnDestroy(): void {
-    for (const subscription of this.subscriptions) {
-      subscription.unsubscribe();
-    }
+    this.subscriptions.forEach(x => x.unsubscribe());
+    this.mapService.deleteMap();
   }
 }

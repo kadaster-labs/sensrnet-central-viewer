@@ -17,17 +17,19 @@
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Category</th>
+                <th scope="col" i18n>Name</th>
+                <th scope="col" i18n>Category</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let device of devices; let i = index" (click)="setselectedDeviceIndex(i)"
                 [class.table-active]="selectedDeviceIndex === i" class="pointer">
                 <th scope="row">
-                    <input [checked]="selectedDeviceIndex === i" type="radio" name="customRadio"
-                        class="form-check-input">
-                    <label class="form-check-label"></label>
+                    <div class="custom-control custom-checkbox text-muted">
+                        <input [checked]="selectedDeviceIndex === i" type="radio" name="customRadio"
+                               class="form-check-input">
+                        <label class="form-check-label"></label>
+                    </div>
                 </th>
                 <td><strong>{{ device.name }}</strong></td>
                 <td>{{ device.category }}</td>
@@ -45,19 +47,19 @@
         </thead>
         <tbody>
             <tr>
-                <td><strong>Name</strong></td>
+                <td><strong i18n>Name</strong></td>
                 <td>{{ devices[selectedDeviceIndex].name }}</td>
             </tr>
             <tr>
-                <td><strong>Category</strong></td>
+                <td><strong i18n>Category</strong></td>
                 <td>{{ devices[selectedDeviceIndex].category }}</td>
             </tr>
             <tr>
-                <td><strong>Description</strong></td>
+                <td><strong i18n>Description</strong></td>
                 <td>{{ devices[selectedDeviceIndex].description }}</td>
             </tr>
             <tr>
-                <td><strong>Connectivity</strong></td>
+                <td><strong i18n>Connectivity</strong></td>
                 <td>{{ devices[selectedDeviceIndex].connectivity }}</td>
             </tr>
         </tbody>
@@ -70,23 +72,23 @@
                 <div class="card-body m-1">
                     <div class="row">
                         <div class="col-12">
-                            <label><span>Description</span></label>
+                            <label><span i18n>Description</span></label>
                             <input value="{{ sensor.description }}" type="text" class="form-control" readonly>
                         </div>
                         <div *ngIf="sensor.type" class="col-12">
-                            <label><span>Type</span></label>
+                            <label><span i18n>Type</span></label>
                             <input value="{{ sensor.type }}" type="text" class="form-control" readonly>
                         </div>
                         <div *ngIf="sensor.manufacturer" class="col-12">
-                            <label><span>Manufacturer</span></label>
+                            <label><span i18n>Manufacturer</span></label>
                             <input value="{{ sensor.manufacturer }}" type="text" class="form-control" readonly>
                         </div>
                         <div *ngIf="sensor.supplier" class="col-12">
-                            <label><span>Supplier</span></label>
+                            <label><span i18n>Supplier</span></label>
                             <input value="{{ sensor.supplier }}" type="text" class="form-control" readonly>
                         </div>
                         <div *ngIf="sensor.documentation" class="col-12">
-                            <label><span>Documentation</span></label>
+                            <label><span i18n>Documentation</span></label>
                             <a href="{{ sensor.documentation }}" type="text" class="form-control"
                                 readonly target="_blank">{{ sensor.documentation }}</a>
                         </div>
@@ -103,50 +105,50 @@
                 <div class="card-body m-1">
                     <div class="row">
                         <div *ngIf="datastream.description" class="col-12">
-                            <label><span>Description</span></label>
+                            <label><span i18n>Description</span></label>
                             <input value="{{ datastream.description }}" type="text" class="form-control" readonly>
                         </div>
                         <div *ngIf="datastream.unitOfMeasurement" class="col-12">
-                            <label><span>Unit of measurement</span></label>
+                            <label><span i18n>Unit of measurement</span></label>
                             <input value="{{ datastream.unitOfMeasurement }}" type="text" class="form-control" readonly>
                         </div>
                         <div *ngIf="datastream.isActive !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
                                 <input [checked]="datastream.isActive" type="checkbox" class="mr-2" readonly>
-                                <span>Is Active</span>
+                                <span i18n>Is Active</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.isPublic !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
                                 <input [checked]="datastream.isPublic" type="checkbox" class="mr-2" readonly>
-                                <span>Is Public</span>
+                                <span i18n>Is Public</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.isOpenData !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
                                 <input [checked]="datastream.isOpenData" type="checkbox" class="mr-2" readonly>
-                                <span>Is Open Data</span>
+                                <span i18n>Is Open Data</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.containsPIData !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
                                 <input [checked]="datastream.containsPIData" type="checkbox" class="mr-2" readonly>
-                                <span>Contains PI Data</span>
+                                <span i18n>Contains PI Data</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.isReusable !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
                                 <input [checked]="datastream.isReusable" type="checkbox" class="mr-2" readonly>
-                                <span>Is Reusable</span>
+                                <span i18n>Is Reusable</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.documentation" class="col-12">
-                            <label><span>Documentation</span></label>
+                            <label><span i18n>Documentation</span></label>
                             <a href="{{ datastream.documentation }}" type="text" class="form-control"
                                 readonly target="_blank">{{ datastream.documentation }}</a>
                         </div>
                         <div *ngIf="datastream.dataLink" class="col-12">
-                            <label><span>Datalink</span></label>
+                            <label><span i18n>Datalink</span></label>
                             <a href="{{ datastream.dataLink }}" type="text" class="form-control"
                                 readonly target="_blank">{{ datastream.dataLink }}</a>
                         </div>
@@ -162,19 +164,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Name</strong></td>
+                                <td><strong i18n>Name</strong></td>
                                 <td>{{ observationGoalsMap.get(observationGoalId).name }}</td>
                             </tr>
                             <tr>
-                                <td><strong>Description</strong></td>
+                                <td><strong i18n>Description</strong></td>
                                 <td>{{ observationGoalsMap.get(observationGoalId).description }}</td>
                             </tr>
                             <tr *ngIf="observationGoalsMap.get(observationGoalId).legalGround">
-                                <td><strong>legalGround</strong></td>
+                                <td><strong i18n>legalGround</strong></td>
                                 <td>{{ observationGoalsMap.get(observationGoalId).legalGround }}</td>
                             </tr>
                             <tr *ngIf="observationGoalsMap.get(observationGoalId).legalGroundLink">
-                                <td><strong>legalGroundLink</strong></td>
+                                <td><strong i18n>legalGroundLink</strong></td>
                                 <td>{{ observationGoalsMap.get(observationGoalId).legalGroundLink }}</td>
                             </tr>
                         </tbody>
@@ -195,16 +197,16 @@
         </thead>
         <tbody>
             <tr>
-                <td><strong>Longitude</strong></td>
+                <td><strong i18n>Longitude</strong></td>
                 <!-- show with 3 decimals minimum, 6 maximum -->
                 <td>{{ location.coordinates[0] | number: '1.3-6' }}</td>
             </tr>
             <tr>
-                <td><strong>Latitude</strong></td>
+                <td><strong i18n>Latitude</strong></td>
                 <td>{{ location.coordinates[1] | number: '1.3-6' }}</td>
             </tr>
-            <tr *ngIf="location.coordinates[2]">
-                <td><strong>Height</strong></td>
+            <tr *ngIf="location.coordinates[2] !== null">
+                <td><strong i18n>Height</strong></td>
                 <td>{{ location.coordinates[2] | number: '1.0-2' }} meter</td>
             </tr>
         </tbody>
@@ -217,7 +219,7 @@
                 <div class="card-body m-1">
                     <div class="row">
                         <div class="col-12">
-                            <label><span>Website</span></label>
+                            <label><span i18n>Website</span></label>
                             <a href="{{ legalEntity.website }}" type="text" class="form-control"
                                 readonly target="_blank">{{ legalEntity.website }}</a>
                         </div>
@@ -233,15 +235,15 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Name</strong></td>
+                                <td><strong i18n>Name</strong></td>
                                 <td>{{ contactDetail.name }}</td>
                             </tr>
                             <tr>
-                                <td><strong>E-mail</strong></td>
+                                <td><strong i18n>E-mail</strong></td>
                                 <td>{{ contactDetail.email }}</td>
                             </tr>
                             <tr>
-                                <td><strong>Phone</strong></td>
+                                <td><strong i18n>Phone</strong></td>
                                 <td>{{ contactDetail.phone }}</td>
                             </tr>
                         </tbody>

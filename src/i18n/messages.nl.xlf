@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="2.0" xmlns="urn:oasis:names:tc:xliff:document:2.0" srcLang="en" trgLang="nl">
+  <file id="ngi18n" original="ng.template">
+    <unit id="ngb.alert.close">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/alert/alert.ts:58,61</note>
+      </notes>
+      <segment state="translated">
+        <source>Close</source>
+      <target>Sluit</target></segment>
+    </unit>
+    <unit id="ngb.carousel.slide-number">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/carousel/carousel.ts:114,118</note>
+        <note category="description">Currently selected slide number read by screen reader</note>
+      </notes>
+      <segment state="translated">
+        <source> Slide <ph id="0" equiv="INTERPOLATION" disp="private _pauseO"/> of <ph id="1" equiv="INTERPOLATION_1" disp="Subject(false);"/> </source>
+      <target> Slide <ph id="0" equiv="INTERPOLATION" disp="private _pauseO"/> of <ph id="1" equiv="INTERPOLATION_1" disp="Subject(false);"/></target></segment>
+    </unit>
+    <unit id="ngb.carousel.previous">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/carousel/carousel.ts:132,133</note>
+      </notes>
+      <segment state="translated">
+        <source>Previous</source>
+      <target>Vorige</target></segment>
+    </unit>
+    <unit id="ngb.carousel.next">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/carousel/carousel.ts:147,151</note>
+      </notes>
+      <segment state="translated">
+        <source>Next</source>
+      <target>Volgende</target></segment>
+    </unit>
+    <unit id="ngb.datepicker.select-month">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation-select.ts:43,47</note>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation-select.ts:49,50</note>
+      </notes>
+      <segment state="translated">
+        <source>Select month</source>
+      <target>Selecteer maand</target></segment>
+    </unit>
+    <unit id="ngb.datepicker.select-year">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation-select.ts:59,63</note>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation-select.ts:72,74</note>
+      </notes>
+      <segment state="translated">
+        <source>Select year</source>
+      <target>Selecteer jaar</target></segment>
+    </unit>
+    <unit id="ngb.datepicker.previous-month">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation.ts:24,27</note>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation.ts:34,35</note>
+      </notes>
+      <segment state="translated">
+        <source>Previous month</source>
+      <target>Vorige maand</target></segment>
+    </unit>
+    <unit id="ngb.datepicker.next-month">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation.ts:44,48</note>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/datepicker/datepicker-navigation.ts:57,61</note>
+      </notes>
+      <segment state="translated">
+        <source>Next month</source>
+      <target>Volgende maand</target></segment>
+    </unit>
+    <unit id="ngb.pagination.first">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:182</note>
+      </notes>
+      <segment state="translated">
+        <source>««</source>
+      <target>««</target></segment>
+    </unit>
+    <unit id="ngb.pagination.previous">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:186,190</note>
+      </notes>
+      <segment state="translated">
+        <source>«</source>
+      <target>«</target></segment>
+    </unit>
+    <unit id="ngb.pagination.next">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:194,195</note>
+      </notes>
+      <segment state="translated">
+        <source>»</source>
+      <target>»</target></segment>
+    </unit>
+    <unit id="ngb.pagination.last">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:201,204</note>
+      </notes>
+      <segment state="translated">
+        <source>»»</source>
+      <target>»»</target></segment>
+    </unit>
+    <unit id="ngb.pagination.first-aria">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:208,209</note>
+      </notes>
+      <segment state="translated">
+        <source>First</source>
+      <target>Eerste</target></segment>
+    </unit>
+    <unit id="ngb.pagination.previous-aria">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:215,216</note>
+      </notes>
+      <segment state="translated">
+        <source>Previous</source>
+      <target>Vorige</target></segment>
+    </unit>
+    <unit id="ngb.pagination.next-aria">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:225,228</note>
+      </notes>
+      <segment state="translated">
+        <source>Next</source>
+      <target>Volgende</target></segment>
+    </unit>
+    <unit id="ngb.pagination.last-aria">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:232,233</note>
+      </notes>
+      <segment state="translated">
+        <source>Last</source>
+      <target>Laatste</target></segment>
+    </unit>
+    <unit id="ngb.progressbar.value">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/progressbar/progressbar.ts:31,38</note>
+      </notes>
+      <segment state="translated">
+        <source><ph id="0" equiv="INTERPOLATION" disp="turn this._max;"/></source>
+      <target><ph id="0" equiv="INTERPOLATION" disp="turn this._max;"/></target></segment>
+    </unit>
+    <unit id="ngb.timepicker.HH">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:40,41</note>
+      </notes>
+      <segment state="translated">
+        <source>HH</source>
+      <target>HH</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.hours">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:45,46</note>
+      </notes>
+      <segment state="translated">
+        <source>Hours</source>
+      <target>Hours</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.MM">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:52,53</note>
+      </notes>
+      <segment state="translated">
+        <source>MM</source>
+      <target>MM</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.minutes">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:57,58</note>
+      </notes>
+      <segment state="translated">
+        <source>Minutes</source>
+      <target>Minutes</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.increment-hours">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:62,63</note>
+      </notes>
+      <segment state="translated">
+        <source>Increment hours</source>
+      <target>Increment hours</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.decrement-hours">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:67,68</note>
+      </notes>
+      <segment state="translated">
+        <source>Decrement hours</source>
+      <target>Decrement hours</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.increment-minutes">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:75,76</note>
+      </notes>
+      <segment state="translated">
+        <source>Increment minutes</source>
+      <target>Increment minutes</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.decrement-minutes">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:82</note>
+      </notes>
+      <segment state="translated">
+        <source>Decrement minutes</source>
+      <target>Decrement minutes</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.SS">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:85,87</note>
+      </notes>
+      <segment state="translated">
+        <source>SS</source>
+      <target>SS</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.seconds">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:90,92</note>
+      </notes>
+      <segment state="translated">
+        <source>Seconds</source>
+      <target>Seconds</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.increment-seconds">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:98,99</note>
+      </notes>
+      <segment state="translated">
+        <source>Increment seconds</source>
+      <target>Increment seconds</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.decrement-seconds">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:105,109</note>
+      </notes>
+      <segment state="translated">
+        <source>Decrement seconds</source>
+      <target>Decrement seconds</target></segment>
+    </unit>
+    <unit id="ngb.timepicker.AM">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:116,123</note>
+      </notes>
+      <segment state="translated">
+        <source><ph id="0" equiv="INTERPOLATION" disp="Step: number;"/></source>
+      <target><ph id="0" equiv="INTERPOLATION" disp="Step: number;"/></target></segment>
+    </unit>
+    <unit id="ngb.timepicker.PM">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:125,130</note>
+      </notes>
+      <segment state="translated">
+        <source><ph id="0" equiv="INTERPOLATION" disp="sible.    */"/></source>
+      <target><ph id="0" equiv="INTERPOLATION" disp="sible.    */"/></target></segment>
+    </unit>
+    <unit id="ngb.toast.close-aria">
+      <notes>
+        <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/toast/toast.ts:76,85</note>
+      </notes>
+      <segment state="translated">
+        <source>Close</source>
+      <target>Sluiten</target></segment>
+    </unit>
+    <unit id="2826581353496868063">
+      <notes>
+        <note category="location">src/app/components/language-switcher/language-switcher.component.html:4</note>
+      </notes>
+      <segment state="translated">
+        <source>Language</source>
+      <target>Taal</target></segment>
+    </unit>
+    <unit id="4112041401321978080">
+      <notes>
+        <note category="location">src/app/components/map/map.component.ts:66</note>
+      </notes>
+      <segment state="translated">
+        <source>Locate me</source>
+      <target>Localiseer mij</target></segment>
+    </unit>
+    <unit id="1590344224054923786">
+      <notes>
+        <note category="location">src/app/components/map/map.component.ts:67</note>
+      </notes>
+      <segment state="translated">
+        <source>Geolocation is not supported by this browser.</source>
+      <target>Geolocatie is niet ondersteund in deze browser.</target></segment>
+    </unit>
+    <unit id="1177467005869954871">
+      <notes>
+        <note category="location">src/app/components/map/map.component.ts:349</note>
+      </notes>
+      <segment state="translated">
+        <source>Enter location</source>
+      <target>Voer locatie in</target></segment>
+    </unit>
+    <unit id="4526390416021631012">
+      <notes>
+        <note category="location">src/app/components/map/map.service.ts:56</note>
+      </notes>
+      <segment state="translated">
+        <source>BAG</source>
+      <target>BAG</target></segment>
+    </unit>
+    <unit id="5086643504817308506">
+      <notes>
+        <note category="location">src/app/components/map/map.service.ts:69</note>
+      </notes>
+      <segment state="translated">
+        <source>Overlays</source>
+      <target>Lagen</target></segment>
+    </unit>
+    <unit id="673924298154786464">
+      <notes>
+        <note category="location">src/app/components/map/map.service.ts:76</note>
+      </notes>
+      <segment state="translated">
+        <source>BRT</source>
+      <target>BRT</target></segment>
+    </unit>
+    <unit id="651663933193825521">
+      <notes>
+        <note category="location">src/app/components/map/map.service.ts:98</note>
+      </notes>
+      <segment state="translated">
+        <source>Aerial photo</source>
+      <target>Luchtfoto</target></segment>
+    </unit>
+    <unit id="6475608532557687416">
+      <notes>
+        <note category="location">src/app/components/map/map.service.ts:119</note>
+      </notes>
+      <segment state="translated">
+        <source>Base maps</source>
+      <target>Basiskaarten</target></segment>
+    </unit><unit id="3719027099325959755">
+      <notes>
+        <note category="location">src/app/components/modal/modal.component.ts:25</note>
+      </notes>
+      <segment state="translated">
+        <source>Devices</source>
+      <target>Apparaten</target></segment>
+    </unit><unit id="314315645942131479">
+      <notes>
+        <note category="location">src/app/components/modal/modal.component.ts:25</note>
+      </notes>
+      <segment state="translated">
+        <source>Info</source>
+      <target>Info</target></segment>
+    </unit><unit id="5778514899777017666">
+      <notes>
+        <note category="location">src/app/components/modal/modal.component.ts:25</note>
+      </notes>
+      <segment state="translated">
+        <source>Sensors</source>
+      <target>Sensoren</target></segment>
+    </unit><unit id="5546023389249689964">
+      <notes>
+        <note category="location">src/app/components/modal/modal.component.ts:25</note>
+      </notes>
+      <segment state="translated">
+        <source>Datastreams</source>
+      <target>Datastromen</target></segment>
+    </unit><unit id="471816275243265264">
+      <notes>
+        <note category="location">src/app/components/modal/modal.component.ts:26</note>
+      </notes>
+      <segment state="translated">
+        <source>Location</source>
+      <target>Locatie</target></segment>
+    </unit><unit id="7922989125096435449">
+      <notes>
+        <note category="location">src/app/components/modal/modal.component.ts:26</note>
+      </notes>
+      <segment state="translated">
+        <source>Contact</source>
+      <target>Contact</target></segment>
+    </unit><unit id="8953033926734869941">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:20</note>
+        <note category="location">src/app/components/modal/modal.html:50</note>
+        <note category="location">src/app/components/modal/modal.html:167</note>
+        <note category="location">src/app/components/modal/modal.html:238</note>
+      </notes>
+      <segment state="translated">
+        <source>Name</source>
+      <target>Naam</target></segment>
+    </unit><unit id="1806667489382256324">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:21</note>
+        <note category="location">src/app/components/modal/modal.html:54</note>
+      </notes>
+      <segment state="translated">
+        <source>Category</source>
+      <target>Categorie</target></segment>
+    </unit>
+    <unit id="8455841993733304388">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:41</note>
+        <note category="location">src/app/components/modal/modal.html:191</note>
+      </notes>
+      <segment state="translated">
+        <source>Sensor details</source>
+      <target>Sensor details</target></segment>
+    </unit>
+    <unit id="1650073357556875190">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:44</note>
+        <note category="location">src/app/components/modal/modal.html:161</note>
+        <note category="location">src/app/components/modal/modal.html:194</note>
+        <note category="location">src/app/components/modal/modal.html:232</note>
+      </notes>
+      <segment state="translated">
+        <source>Attribute</source>
+      <target>Attribuut</target></segment>
+    </unit>
+    <unit id="6555318547274416232">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:45</note>
+        <note category="location">src/app/components/modal/modal.html:162</note>
+        <note category="location">src/app/components/modal/modal.html:195</note>
+        <note category="location">src/app/components/modal/modal.html:233</note>
+      </notes>
+      <segment state="translated">
+        <source>Value</source>
+      <target>Waarde</target></segment>
+    </unit><unit id="4902817035128594900">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:58</note>
+        <note category="location">src/app/components/modal/modal.html:75</note>
+        <note category="location">src/app/components/modal/modal.html:108</note>
+        <note category="location">src/app/components/modal/modal.html:171</note>
+      </notes>
+      <segment state="translated">
+        <source>Description</source>
+      <target>Beschrijving</target></segment>
+    </unit><unit id="2887948366226336935">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:62</note>
+      </notes>
+      <segment state="translated">
+        <source>Connectivity</source>
+      <target>Connectiviteit</target></segment>
+    </unit><unit id="8650499415827640724">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:79</note>
+      </notes>
+      <segment state="translated">
+        <source>Type</source>
+      <target>Type</target></segment>
+    </unit><unit id="859889886317613793">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:83</note>
+      </notes>
+      <segment state="translated">
+        <source>Manufacturer</source>
+      <target>Fabrikant</target></segment>
+    </unit><unit id="4348920359154187664">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:87</note>
+      </notes>
+      <segment state="translated">
+        <source>Supplier</source>
+      <target>Leverancier</target></segment>
+    </unit><unit id="4895326106573044490">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:91</note>
+        <note category="location">src/app/components/modal/modal.html:146</note>
+      </notes>
+      <segment state="translated">
+        <source>Documentation</source>
+      <target>Documentatie</target></segment>
+    </unit><unit id="842818106493560934">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:112</note>
+      </notes>
+      <segment state="translated">
+        <source>Unit of measurement</source>
+      <target>Meeteenheid</target></segment>
+    </unit><unit id="6929299219486908442">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:118</note>
+      </notes>
+      <segment state="translated">
+        <source>Is Active</source>
+      <target>Is Actief</target></segment>
+    </unit><unit id="4316181475809137059">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:124</note>
+      </notes>
+      <segment state="translated">
+        <source>Is Public</source>
+      <target>Is Publiek</target></segment>
+    </unit><unit id="2765996121940624988">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:130</note>
+      </notes>
+      <segment state="translated">
+        <source>Is Open Data</source>
+      <target>Is Open Data</target></segment>
+    </unit><unit id="7908517785736197681">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:136</note>
+      </notes>
+      <segment state="translated">
+        <source>Contains PI Data</source>
+      <target>Bevat Persoonlijke Informatie</target></segment>
+    </unit><unit id="4975476383611780549">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:142</note>
+      </notes>
+      <segment state="translated">
+        <source>Is Reusable</source>
+      <target>Is Herbruikbaar</target></segment>
+    </unit><unit id="8732411010010701151">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:151</note>
+      </notes>
+      <segment state="translated">
+        <source>Datalink</source>
+      <target>Datalink</target></segment>
+    </unit>
+    <unit id="1745670934805537328">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:158</note>
+      </notes>
+      <segment state="translated">
+        <source>Legal ground</source>
+      <target>Juridische grond</target></segment>
+    </unit><unit id="4032517162364164264">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:175</note>
+      </notes>
+      <segment state="translated">
+        <source>legalGround</source>
+      <target>juridische grond</target></segment>
+    </unit><unit id="5027277881206395128">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:179</note>
+      </notes>
+      <segment state="translated">
+        <source>legalGroundLink</source>
+      <target>juridische grond link</target></segment>
+    </unit><unit id="5174359152122758396">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:200</note>
+      </notes>
+      <segment state="translated">
+        <source>Longitude</source>
+      <target>Lengtegraad</target></segment>
+    </unit><unit id="8314090883669143391">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:205</note>
+      </notes>
+      <segment state="translated">
+        <source>Latitude</source>
+      <target>Breedtegraad</target></segment>
+    </unit><unit id="3033623772164647792">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:209</note>
+      </notes>
+      <segment state="translated">
+        <source>Height</source>
+      <target>Hoogte</target></segment>
+    </unit><unit id="5481284030283031915">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:222</note>
+      </notes>
+      <segment state="translated">
+        <source>Website</source>
+      <target>Website</target></segment>
+    </unit>
+    <unit id="606929755258304715">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:229</note>
+      </notes>
+      <segment state="translated">
+        <source>Contact details</source>
+      <target>Contact details</target></segment>
+    </unit><unit id="1890300073702152532">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:242</note>
+      </notes>
+      <segment state="translated">
+        <source>E-mail</source>
+      <target>E-mail</target></segment>
+    </unit><unit id="3262236020277300799">
+      <notes>
+        <note category="location">src/app/components/modal/modal.html:246</note>
+      </notes>
+      <segment state="translated">
+        <source>Phone</source>
+      <target>Telefoonnummer</target></segment>
+    </unit>
+    <unit id="3905273219504458700">
+      <notes>
+        <note category="location">src/app/components/navbar/navbar.component.html:3,4</note>
+      </notes>
+      <segment state="translated">
+        <source> SensRNet Central Viewer </source>
+      <target> SensRNet Centrale Viewer </target></segment>
+    </unit>
+    <unit id="type.beacon">
+      <notes>
+        <note category="location">src/app/model/sensorTypes.ts:8</note>
+      </notes>
+      <segment state="translated">
+        <source>Beacon</source>
+      <target>Baken</target></segment>
+    </unit>
+    <unit id="type.sensor">
+      <notes>
+        <note category="location">src/app/model/sensorTypes.ts:9</note>
+      </notes>
+      <segment state="translated">
+        <source>Sensor</source>
+      <target>Sensor</target></segment>
+    </unit>
+    <unit id="type.camera">
+      <notes>
+        <note category="location">src/app/model/sensorTypes.ts:10</note>
+      </notes>
+      <segment state="translated">
+        <source>Camera</source>
+      <target>Camera</target></segment>
+    </unit>
+    <unit id="7819314041543176992">
+      <notes>
+        <note category="location">src/app/services/modal.service.ts:9</note>
+      </notes>
+      <segment state="translated">
+        <source>Close</source>
+      <target>Sluiten</target></segment>
+    </unit>
+  </file>
+</xliff>
