@@ -14,9 +14,9 @@
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/carousel/carousel.ts:114,118</note>
         <note category="description">Currently selected slide number read by screen reader</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source> Slide <ph id="0" equiv="INTERPOLATION" disp="private _pauseO"/> of <ph id="1" equiv="INTERPOLATION_1" disp="Subject(false);"/> </source>
-      <target> Slide <ph id="0" equiv="INTERPOLATION" disp="private _pauseO"/> of <ph id="1" equiv="INTERPOLATION_1" disp="Subject(false);"/> </target></segment>
+      <target> Slide <ph id="0" equiv="INTERPOLATION" disp="private _pauseO"/> of <ph id="1" equiv="INTERPOLATION_1" disp="Subject(false);"/></target></segment>
     </unit>
     <unit id="ngb.carousel.previous">
       <notes>
@@ -74,7 +74,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:182</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>««</source>
       <target>««</target></segment>
     </unit>
@@ -82,7 +82,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:186,190</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>«</source>
       <target>«</target></segment>
     </unit>
@@ -90,7 +90,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:194,195</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>»</source>
       <target>»</target></segment>
     </unit>
@@ -98,7 +98,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/pagination/pagination.ts:201,204</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>»»</source>
       <target>»»</target></segment>
     </unit>
@@ -138,7 +138,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/progressbar/progressbar.ts:31,38</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source><ph id="0" equiv="INTERPOLATION" disp="turn this._max;"/></source>
       <target><ph id="0" equiv="INTERPOLATION" disp="turn this._max;"/></target></segment>
     </unit>
@@ -146,7 +146,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:40,41</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>HH</source>
       <target>HH</target></segment>
     </unit>
@@ -154,7 +154,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:45,46</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Hours</source>
       <target>Hours</target></segment>
     </unit>
@@ -162,7 +162,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:52,53</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>MM</source>
       <target>MM</target></segment>
     </unit>
@@ -170,7 +170,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:57,58</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Minutes</source>
       <target>Minutes</target></segment>
     </unit>
@@ -178,7 +178,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:62,63</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Increment hours</source>
       <target>Increment hours</target></segment>
     </unit>
@@ -186,7 +186,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:67,68</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Decrement hours</source>
       <target>Decrement hours</target></segment>
     </unit>
@@ -194,7 +194,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:75,76</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Increment minutes</source>
       <target>Increment minutes</target></segment>
     </unit>
@@ -202,7 +202,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:82</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Decrement minutes</source>
       <target>Decrement minutes</target></segment>
     </unit>
@@ -210,7 +210,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:85,87</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>SS</source>
       <target>SS</target></segment>
     </unit>
@@ -218,7 +218,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:90,92</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Seconds</source>
       <target>Seconds</target></segment>
     </unit>
@@ -226,7 +226,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:98,99</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Increment seconds</source>
       <target>Increment seconds</target></segment>
     </unit>
@@ -234,7 +234,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:105,109</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Decrement seconds</source>
       <target>Decrement seconds</target></segment>
     </unit>
@@ -242,7 +242,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:116,123</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source><ph id="0" equiv="INTERPOLATION" disp="Step: number;"/></source>
       <target><ph id="0" equiv="INTERPOLATION" disp="Step: number;"/></target></segment>
     </unit>
@@ -250,7 +250,7 @@
       <notes>
         <note category="location">node_modules/@ng-bootstrap/ng-bootstrap/src/timepicker/timepicker.ts:125,130</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source><ph id="0" equiv="INTERPOLATION" disp="sible.    */"/></source>
       <target><ph id="0" equiv="INTERPOLATION" disp="sible.    */"/></target></segment>
     </unit>
