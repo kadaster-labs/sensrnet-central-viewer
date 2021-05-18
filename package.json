@@ -6,7 +6,7 @@
     "start": "ng serve --proxy-config src/proxy.conf.json --configuration=en",
     "start-nl": "npm run start -- --configuration=nl",
     "build": "ng build --prod",
-    "test": "ng test",
+    "test": "ng test --no-watch --no-progress --browsers=ChromeHeadlessCI --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "extract-i18n": "ng extract-i18n centralViewer --format xlf2 --output-path src/i18n && ng run centralViewer:xliffmerge"

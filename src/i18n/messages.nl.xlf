@@ -298,7 +298,7 @@
       <notes>
         <note category="location">src/app/components/map/map.service.ts:56</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>BAG</source>
       <target>BAG</target></segment>
     </unit>
@@ -306,15 +306,15 @@
       <notes>
         <note category="location">src/app/components/map/map.service.ts:69</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Overlays</source>
-      <target>Overlays</target></segment>
+      <target>Lagen</target></segment>
     </unit>
     <unit id="673924298154786464">
       <notes>
         <note category="location">src/app/components/map/map.service.ts:76</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>BRT</source>
       <target>BRT</target></segment>
     </unit>
@@ -344,7 +344,7 @@
       <notes>
         <note category="location">src/app/components/modal/modal.component.ts:25</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Info</source>
       <target>Info</target></segment>
     </unit><unit id="5778514899777017666">
@@ -372,7 +372,7 @@
       <notes>
         <note category="location">src/app/components/modal/modal.component.ts:26</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Contact</source>
       <target>Contact</target></segment>
     </unit><unit id="8953033926734869941">
@@ -445,7 +445,7 @@
       <notes>
         <note category="location">src/app/components/modal/modal.html:79</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Type</source>
       <target>Type</target></segment>
     </unit><unit id="859889886317613793">
@@ -495,7 +495,7 @@
       <notes>
         <note category="location">src/app/components/modal/modal.html:130</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Is Open Data</source>
       <target>Is Open Data</target></segment>
     </unit><unit id="7908517785736197681">
@@ -516,7 +516,7 @@
       <notes>
         <note category="location">src/app/components/modal/modal.html:151</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Datalink</source>
       <target>Datalink</target></segment>
     </unit>
@@ -533,28 +533,28 @@
       </notes>
       <segment state="translated">
         <source>legalGround</source>
-      <target>Juridische grond</target></segment>
+      <target>juridische grond</target></segment>
     </unit><unit id="5027277881206395128">
       <notes>
         <note category="location">src/app/components/modal/modal.html:179</note>
       </notes>
       <segment state="translated">
         <source>legalGroundLink</source>
-      <target>Juridische grond link</target></segment>
+      <target>juridische grond link</target></segment>
     </unit><unit id="5174359152122758396">
       <notes>
         <note category="location">src/app/components/modal/modal.html:200</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Longitude</source>
-      <target>Longitude</target></segment>
+      <target>Lengtegraad</target></segment>
     </unit><unit id="8314090883669143391">
       <notes>
         <note category="location">src/app/components/modal/modal.html:205</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Latitude</source>
-      <target>Latitude</target></segment>
+      <target>Breedtegraad</target></segment>
     </unit><unit id="3033623772164647792">
       <notes>
         <note category="location">src/app/components/modal/modal.html:209</note>
@@ -566,7 +566,7 @@
       <notes>
         <note category="location">src/app/components/modal/modal.html:222</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Website</source>
       <target>Website</target></segment>
     </unit>
@@ -574,14 +574,14 @@
       <notes>
         <note category="location">src/app/components/modal/modal.html:229</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Contact details</source>
       <target>Contact details</target></segment>
     </unit><unit id="1890300073702152532">
       <notes>
         <note category="location">src/app/components/modal/modal.html:242</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>E-mail</source>
       <target>E-mail</target></segment>
     </unit><unit id="3262236020277300799">
@@ -612,7 +612,7 @@
       <notes>
         <note category="location">src/app/model/sensorTypes.ts:9</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Sensor</source>
       <target>Sensor</target></segment>
     </unit>
@@ -620,7 +620,7 @@
       <notes>
         <note category="location">src/app/model/sensorTypes.ts:10</note>
       </notes>
-      <segment state="initial">
+      <segment state="translated">
         <source>Camera</source>
       <target>Camera</target></segment>
     </unit>
