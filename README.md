@@ -7,17 +7,11 @@
     <a href="https://github.com/kadaster-labs/sensrnet-central-viewer/releases" alt="Version">
         <img src="https://img.shields.io/github/package-json/v/kadaster-labs/sensrnet-central-viewer" />
     </a> 
-    <a href="https://github.com/kadaster-labs/sensrnet-central-viewer/graphs/contributors" alt="Contributors">
-        <img src="https://img.shields.io/github/contributors/kadaster-labs/sensrnet-central-viewer" />
-    </a>
-    <a href="https://github.com/badges/shields/pulse" alt="Activity">
-        <img src="https://img.shields.io/github/commit-activity/m/kadaster-labs/sensrnet-central-viewer" />
+    <a href="https://github.com/kadaster-labs/sensrnet-central-viewer/actions?query=workflow%3A%22Node.js+CI%22" alt="Build status">
+        <img src="https://github.com/kadaster-labs/sensrnet-central-viewer/workflows/Node.js%20CI/badge.svg" />
     </a>
     <a href="https://sonarcloud.io/dashboard?id=kadaster-labs_sensrnet-registry-frontend" alt="Quality Gate">
         <img src="https://sonarcloud.io/api/project_badges/measure?project=kadaster-labs_sensrnet-registry-frontend&metric=alert_status" />
-    </a>
-    <a href="https://sonarcloud.io/dashboard?id=kadaster-labs_sensrnet-registry-frontend" alt="Lines of code">
-        <img src="https://sonarcloud.io/api/project_badges/measure?project=kadaster-labs_sensrnet-registry-frontend&metric=ncloc" />
     </a>
 </p>
 
