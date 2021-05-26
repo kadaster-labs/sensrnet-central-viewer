@@ -23,7 +23,6 @@ Before starting with development, you'll need the following things:
 - Angular CLI: `npm install -g @angular/cli`
 - Install dependencies: `npm install` 
 
-*Note: this project contains some closed source Kadaster dependencies. This is planned to change, but for now it means that this project can only be built when connected to the Kadaster VPN. The NPM registry is set in `.npmrc`.*
 
 The VS Code editor with ESLint plugin is recommended, but not required.
 
@@ -54,8 +53,7 @@ Deployment is done in an Azure Kubernetes Service (AKS) cluster. For releases, r
 *Note: since VPN is still required for building the project, this script won't work as is. For the `npm install` step the VPN is required, but for `az acr login` is needs to be off. Easiest for now is to run this script line for line, enabling VPN just before `npm install` and disabling right after.*
 
 ## Deployment
-Once the images are available in the container registry, deployment can be done (on Kubernetes) by using Kustomize and the desired config, i.e.
-`kustomize build deployment/overlays/gemeente-a | kubectl apply -f -`
+The built image is available from Docker Hub, deployment can be done (on Kubernetes) by using our Helm Charts: https://github.com/kadaster-labs/sensrnet-helm-charts.
 
 ## Internationalization + Localization
 A comprehensive guide on how to do i18n and l10n in Angular is found at https://angular.io/guide/i18n. In its most basic form, the custom attribute `i18n` is placed on HTML elements. A translation file can then be generated with `ng xi18n --output-path src/locale`. This file can be duplicated for each extra language and its duplications can be translated using standard translation tools, for example Poedit. Then, during building, Angular generates alternative sites for each language, exposing them under different URL path, for example /nl/ for Dutch. 
