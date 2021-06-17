@@ -1,5 +1,5 @@
 {
-  "/sensrnet-geoserver": {
+  "/geoserver/wfs": {
     "target": "http://localhost:8082/geoserver/wfs",
     "secure": false,
     "logLevel": "debug"
