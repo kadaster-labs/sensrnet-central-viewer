@@ -1,7 +1,6 @@
 import proj4 from 'proj4';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import ResizeObserver from 'resize-observer-polyfill';
 import { EnvService } from '../../services/env.service';
 import { Component, OnInit, Input, OnDestroy, HostBinding, ElementRef } from '@angular/core';
 
