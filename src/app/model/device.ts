@@ -19,14 +19,14 @@ interface BaseDevice {
 }
 
 export interface Device extends BaseDevice {
-  dataStreams?: Datastream[];
+  datastreams?: Datastream[];
   sensors?: Sensor[];
   location_object: DeviceLocation;
 }
 
 // Device as returned by GeoServer. It stringifies the nested objects.
 export interface DeviceDTO extends BaseDevice {
-  dataStreams?: string;
+  datastreams?: string;
   sensors?: string;
   location_object: string;
 }
