@@ -22,10 +22,6 @@ COPY ./entrypoint.sh ./entrypoint.sh
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 COPY --chown=nginx --from=builder /app/dist/app /usr/share/nginx/html
 
-USER root
-RUN chown -R nginx /usr/share/nginx/html
-USER nginx
-
 EXPOSE 8080
 
 ENTRYPOINT ["./entrypoint.sh", "run"]
