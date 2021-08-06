@@ -36,7 +36,6 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "localize": true,
-            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets",
@@ -55,7 +54,13 @@
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/bootstrap-select/dist/js/bootstrap-select.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -91,7 +96,8 @@
             "en": {
               "localize": ["en"]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
