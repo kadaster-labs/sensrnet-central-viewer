@@ -57,7 +57,7 @@ export class ModalComponent implements OnInit, DoCheck {
   }
 
   public getDatastreams(device: DeviceDTO): Datastream[] {
-    return device.dataStreams ? JSON.parse(device.dataStreams) : [];
+    return device.datastreams ? JSON.parse(device.datastreams) : [];
   }
 
   public getSensors(device: DeviceDTO): Sensor[] {
