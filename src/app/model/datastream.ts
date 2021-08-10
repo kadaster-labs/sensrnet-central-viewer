@@ -23,7 +23,7 @@ export interface Datastream {
   isActive?: boolean;
   isPublic?: boolean;
   isOpenData?: boolean;
-  containsPIData?: boolean;
+  containsPersonalInfoData?: boolean;
   isReusable?: boolean;
   documentation?: string;
   dataLink?: string;
