@@ -12,6 +12,8 @@ export class ExternalLinkComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    const withHttp = url => !/^https?:\/\//i.test(url) ? `http://${url}` : url;
+    this.url = withHttp(this.url);
   }
 
 }
