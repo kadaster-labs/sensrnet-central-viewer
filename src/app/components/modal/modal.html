@@ -174,7 +174,9 @@
                             </tr>
                             <tr *ngIf="observationGoalsMap.get(observationGoalId).legalGroundLink">
                                 <td><strong i18n>legalGroundLink</strong></td>
-                                <td>{{ observationGoalsMap.get(observationGoalId).legalGroundLink }}</td>
+                                <td>
+                                    <app-external-link url="{{ observationGoalsMap.get(observationGoalId).legalGroundLink }}"></app-external-link>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
