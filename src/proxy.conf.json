@@ -1,6 +1,6 @@
 {
-  "/geoserver/wfs": {
-    "target": "http://localhost:8082/geoserver/wfs",
+  "/geoserver": {
+    "target": "http://localhost:8082",
     "secure": false,
     "logLevel": "debug"
   },
