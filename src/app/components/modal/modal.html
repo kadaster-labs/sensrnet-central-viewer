@@ -89,8 +89,7 @@
                         </div>
                         <div *ngIf="sensor.documentation" class="col-12">
                             <label><span i18n>Documentation</span></label>
-                            <a href="{{ sensor.documentation }}" type="text" class="form-control"
-                                readonly target="_blank">{{ sensor.documentation }}</a>
+                            <app-external-link [url]="sensor.documentation" class="form-control" readonly></app-external-link>
                         </div>
                     </div>
                 </div>
@@ -144,13 +143,11 @@
                         </div>
                         <div *ngIf="datastream.documentation" class="col-12">
                             <label><span i18n>Documentation</span></label>
-                            <a href="{{ datastream.documentation }}" type="text" class="form-control"
-                                readonly target="_blank">{{ datastream.documentation }}</a>
+                            <app-external-link [url]="datastream.documentation" class="form-control" readonly></app-external-link>
                         </div>
                         <div *ngIf="datastream.dataLink" class="col-12">
                             <label><span i18n>Datalink</span></label>
-                            <a href="{{ datastream.dataLink }}" type="text" class="form-control"
-                                readonly target="_blank">{{ datastream.dataLink }}</a>
+                            <app-external-link [url]="datastream.dataLink" class="form-control" readonly></app-external-link>
                         </div>
                     </div>
                     <table *ngFor="let observationGoalId of datastream.observationGoalIds"
@@ -177,7 +174,9 @@
                             </tr>
                             <tr *ngIf="observationGoalsMap.get(observationGoalId).legalGroundLink">
                                 <td><strong i18n>legalGroundLink</strong></td>
-                                <td>{{ observationGoalsMap.get(observationGoalId).legalGroundLink }}</td>
+                                <td>
+                                    <app-external-link [url]="observationGoalsMap.get(observationGoalId).legalGroundLink"></app-external-link>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -220,8 +219,7 @@
                     <div class="row">
                         <div class="col-12">
                             <label><span i18n>Website</span></label>
-                            <a href="{{ legalEntity.website }}" type="text" class="form-control"
-                                readonly target="_blank">{{ legalEntity.website }}</a>
+                            <app-external-link [url]="legalEntity.website" class="form-control" readonly></app-external-link>
                         </div>
                     </div>
                     <table *ngFor="let contactDetail of legalEntity.contactDetails"

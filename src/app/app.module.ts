@@ -8,6 +8,7 @@ import { LanguageSwitcherComponent } from './components/language-switcher/langua
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ExternalLinkComponent } from './components/external-link/external-link.component';
 import { MapService } from './components/map/map.service';
 import { ViewerComponent } from './viewer/viewer.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
@@ -23,6 +24,7 @@ import * as freeSolidSvgIcons from '@fortawesome/free-solid-svg-icons';
 @NgModule({
   declarations: [
     AppComponent,
+    ExternalLinkComponent,
     MapComponent,
     ModalComponent,
     NavBarComponent,
