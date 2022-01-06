@@ -17,12 +17,28 @@ replace_geoserver_env() {
   done
 }
 
+replace_base_href() {
+  # Strip leading and trailing '/'s, if present
+  BASE=$(echo $BASE_HREF | sed 's/^\///;s/\/$//')
+
+  for dir in /usr/share/nginx/html/*/
+  do
+    sed -i "s@<base href=\"/@<base href=\"/${BASE}/@" ${dir}index.html
+  done
+
+  sed -i "s@# rewrite ^/BASE_HREF(/.*)$ \$1 last;@rewrite ^/${BASE}(/.*)$ \$1 last;@" /etc/nginx/conf.d/default.conf
+}
+
 if [[ ! -z "$API_URL" ]]; then
   replace_api_env
 fi
 
 if [[ ! -z "$GEOSERVER_URL" ]]; then
   replace_geoserver_env
+fi
+
+if [ ! -z "$BASE_HREF" ] && [ ! $BASE_HREF = '/' ]; then
+  replace_base_href
 fi
 
 if [ "$1" = "run" ]; then
