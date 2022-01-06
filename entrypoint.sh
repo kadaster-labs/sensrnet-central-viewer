@@ -6,7 +6,7 @@ replace_api_env() {
   # each language has its own subfolder, having its own env.js
   for dir in /usr/share/nginx/html/*/
   do
-    sed -i "s@window.__env.apiUrl = 'api'@window.__env.apiUrl = '${API_URL}'@" ${dir}env.js
+    sed -i "s@window.__env.apiUrl = '/api'@window.__env.apiUrl = '${API_URL}'@" ${dir}env.js
   done
 }
 
