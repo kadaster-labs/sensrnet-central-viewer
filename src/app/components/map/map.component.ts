@@ -84,7 +84,7 @@ export class MapComponent implements OnInit, OnDestroy {
       }), new Style({
         image: new Icon({
           scale: 0.25,
-          src: `/assets/icons/${item}_op.png`
+          src: `assets/icons/${item}_op.png`
         })
       })];
 
