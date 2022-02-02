@@ -186,26 +186,18 @@ export class MapComponent implements OnInit, OnDestroy {
       featureStyle: styleSelectedCluster,
     });
     this.map.addInteraction(this.selectCluster);
+  }
 
-    this.selectCluster.getFeatures().on('add', async event => {
+  private async onFeatureSelected(feature) {
+    this.highlightFeature(new Feature({
+      geometry: feature.values_.geometry,
+    }));
+
+    try {
+      await this.modalService.showDevices([feature.values_], this.modalService.btnCancelText, 'lg');
+    } finally {
       this.removeHighlight();
-
-      const activeFeatures = event.element.get('features');
-      if (activeFeatures.length === 1) {
-        const feature = activeFeatures[0];
-        const geometry = new Feature({
-          geometry: feature.values_.geometry,
-        });
-        this.highlightFeature(geometry);
-
-        try {
-          await this.modalService.showDevices([feature.values_], this.modalService.btnCancelText, 'lg');
-          this.removeHighlight();
-        } catch {
-          this.removeHighlight();
-        }
-      }
-    });
+    }
   }
 
   private onSingleClick(event: MapBrowserEvent) {
@@ -216,6 +208,9 @@ export class MapComponent implements OnInit, OnDestroy {
 
       // check if feature is a cluster with multiple features
       if (features.length < 2) {
+        if (features.length === 1) {
+          this.onFeatureSelected(features[0]);
+        }
         return;
       }
 
