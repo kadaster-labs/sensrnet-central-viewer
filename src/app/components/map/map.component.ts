@@ -203,13 +203,13 @@ export class MapComponent implements OnInit, OnDestroy {
   private onSingleClick(event: MapBrowserEvent) {
     this.removeHighlight();
 
-    event.map.forEachFeatureAtPixel(event.pixel, (data) => {
+    event.map.forEachFeatureAtPixel(event.pixel, async (data) => {
       const features = data.getProperties().features;
 
       // check if feature is a cluster with multiple features
       if (features.length < 2) {
         if (features.length === 1) {
-          this.onFeatureSelected(features[0]);
+          await this.onFeatureSelected(features[0]);
         }
         return;
       }
