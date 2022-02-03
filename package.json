@@ -1,6 +1,6 @@
 {
   "name": "sensrnet-central-viewer",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config src/proxy.conf.json --configuration=en",
