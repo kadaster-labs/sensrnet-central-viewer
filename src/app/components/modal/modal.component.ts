@@ -85,6 +85,10 @@ export class ModalComponent implements OnInit, DoCheck {
     this.legalEntities = this.httpService.getLegalEntities(device._id);
   }
 
+  public formatUnitOfMeasurement(unitOfMeasurement: Record<string, any>) {
+    return `${unitOfMeasurement.name} (${unitOfMeasurement.symbol})`;
+  }
+
   private async getObservationGoals(device: DeviceDTO): Promise<void> {
     const datastreams: Datastream[] = this.getDatastreams(device);
     for (const datastream of datastreams) {

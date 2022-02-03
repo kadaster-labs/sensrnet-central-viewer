@@ -73,19 +73,19 @@
                     <div class="row">
                         <div class="col-12">
                             <label><span i18n>Description</span></label>
-                            <input value="{{ sensor.description }}" type="text" class="form-control" readonly>
+                            <input value="{{ sensor.description }}" type="text" class="form-control" disabled readonly>
                         </div>
                         <div *ngIf="sensor.type" class="col-12">
                             <label><span i18n>Type</span></label>
-                            <input value="{{ sensor.type }}" type="text" class="form-control" readonly>
+                            <input value="{{ sensor.type }}" type="text" class="form-control" disabled readonly>
                         </div>
                         <div *ngIf="sensor.manufacturer" class="col-12">
                             <label><span i18n>Manufacturer</span></label>
-                            <input value="{{ sensor.manufacturer }}" type="text" class="form-control" readonly>
+                            <input value="{{ sensor.manufacturer }}" type="text" class="form-control" disabled readonly>
                         </div>
                         <div *ngIf="sensor.supplier" class="col-12">
                             <label><span i18n>Supplier</span></label>
-                            <input value="{{ sensor.supplier }}" type="text" class="form-control" readonly>
+                            <input value="{{ sensor.supplier }}" type="text" class="form-control" disabled readonly>
                         </div>
                         <div *ngIf="sensor.documentation" class="col-12">
                             <label><span i18n>Documentation</span></label>
@@ -105,39 +105,39 @@
                     <div class="row">
                         <div *ngIf="datastream.description" class="col-12">
                             <label><span i18n>Description</span></label>
-                            <input value="{{ datastream.description }}" type="text" class="form-control" readonly>
+                            <input value="{{ datastream.description }}" type="text" class="form-control" disabled readonly>
                         </div>
                         <div *ngIf="datastream.unitOfMeasurement" class="col-12">
                             <label><span i18n>Unit of measurement</span></label>
-                            <input value="{{ datastream.unitOfMeasurement }}" type="text" class="form-control" readonly>
+                            <input value="{{ formatUnitOfMeasurement(datastream.unitOfMeasurement) }}" type="text" class="form-control" disabled readonly>
                         </div>
                         <div *ngIf="datastream.isActive !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
-                                <input [checked]="datastream.isActive" type="checkbox" class="mr-2" readonly>
+                                <input [checked]="datastream.isActive" type="checkbox" class="mr-2" disabled readonly>
                                 <span i18n>Is Active</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.isPublic !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
-                                <input [checked]="datastream.isPublic" type="checkbox" class="mr-2" readonly>
+                                <input [checked]="datastream.isPublic" type="checkbox" class="mr-2" disabled readonly>
                                 <span i18n>Is Public</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.isOpenData !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
-                                <input [checked]="datastream.isOpenData" type="checkbox" class="mr-2" readonly>
+                                <input [checked]="datastream.isOpenData" type="checkbox" class="mr-2" disabled readonly>
                                 <span i18n>Is Open Data</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.containsPersonalInfoData !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
-                                <input [checked]="datastream.containsPersonalInfoData" type="checkbox" class="mr-2" readonly>
+                                <input [checked]="datastream.containsPersonalInfoData" type="checkbox" class="mr-2" disabled readonly>
                                 <span i18n>Contains PI Data</span>
                             </label>
                         </div>
                         <div *ngIf="datastream.isReusable !== undefined" class="col-md-2 mt-1 text-left">
                             <label>
-                                <input [checked]="datastream.isReusable" type="checkbox" class="mr-2" readonly>
+                                <input [checked]="datastream.isReusable" type="checkbox" class="mr-2" disabled readonly>
                                 <span i18n>Is Reusable</span>
                             </label>
                         </div>
