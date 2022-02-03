@@ -195,6 +195,8 @@ export class MapComponent implements OnInit, OnDestroy {
 
     try {
       await this.modalService.showDevices([feature.values_], this.modalService.btnCancelText, 'lg');
+    } catch {
+      // modal was closed
     } finally {
       this.removeHighlight();
     }
