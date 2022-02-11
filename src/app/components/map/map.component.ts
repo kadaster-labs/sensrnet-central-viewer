@@ -160,7 +160,7 @@ export class MapComponent implements OnInit, OnDestroy {
       format: new GeoJSON(),
       url: (extent) => {
         return (
-          `${this.env.geoserverUrl}?service=WFS&version=1.1.0&request=GetFeature&typename=devices&` +
+          `${this.env.mapServerUrl}?service=WFS&version=1.1.0&request=GetFeature&typename=devices&` +
           `outputFormat=application/json&srsname=EPSG:28992&bbox=${extent.join(',')},EPSG:28992`
         );
       },

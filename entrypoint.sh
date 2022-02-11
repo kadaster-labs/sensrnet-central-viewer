@@ -10,10 +10,10 @@ replace_api_env() {
   done
 }
 
-replace_geoserver_env() {
+replace_mapserver_env() {
   for dir in /usr/share/nginx/html/*/
   do
-    sed -i "s@window.__env.geoserverUrl = '/geoserver/wfs'@window.__env.geoserverUrl = '${GEOSERVER_URL}'@" ${dir}env.js
+    sed -i "s@window.__env.mapServerUrl = '/mapserver'@window.__env.mapServerUrl = '${MAPSERVER_URL}'@" ${dir}env.js
   done
 }
 
@@ -33,8 +33,8 @@ if [[ ! -z "$API_URL" ]]; then
   replace_api_env
 fi
 
-if [[ ! -z "$GEOSERVER_URL" ]]; then
-  replace_geoserver_env
+if [[ ! -z "$MAPSERVER_URL" ]]; then
+  replace_mapserver_env
 fi
 
 if [ ! -z "$BASE_HREF" ] && [ ! $BASE_HREF = '/' ]; then

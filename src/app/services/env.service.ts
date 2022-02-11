@@ -6,8 +6,8 @@ export class EnvService {
   // API url
   public apiUrl = '';
 
-  // Geoserver url
-  public geoserverUrl = '';
+  // Mapserver url
+  public mapServerUrl = '';
 
   constructor() {
   }

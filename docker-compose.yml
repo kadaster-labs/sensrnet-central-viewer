@@ -6,6 +6,6 @@ services:
         context: "."
     environment:
       - API_URL=http://localhost:3000/api
-      - GEOSERVER_URL=http://localhost:8082/geoserver/wfs
+      - MAPSERVER_URL=http://localhost:8082
     ports:
       - 8080:8080
