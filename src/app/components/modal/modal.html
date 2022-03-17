@@ -216,14 +216,13 @@
             <div class="card-body">
                 <h5 class="card-title mb-0">{{ legalEntity.name }} (Owner)</h5>
                 <div class="card-body m-1">
-                    <div class="row">
+                    <div class="row mb-5" *ngIf="legalEntity.website">
                         <div class="col-12">
                             <label><span i18n>Website</span></label>
                             <app-external-link [url]="legalEntity.website" class="form-control" readonly></app-external-link>
                         </div>
                     </div>
-                    <table *ngFor="let contactDetail of legalEntity.contactDetails"
-                        class="table table-sm table-striped mt-5">
+                    <table *ngFor="let contactDetail of legalEntity.contactDetails" class="table table-sm table-striped">
                         <caption i18n>Contact details</caption>
                         <thead class="sr-only sr-only-focusable">
                             <tr>
